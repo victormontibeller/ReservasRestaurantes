@@ -19,12 +19,22 @@ import lombok.Setter;
 @Table(name = "comentario")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Comentario {
-        @Id
+    @Id
     @Column(unique = true)
-    private Long id; 
+    private long id; 
 
     @OneToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente; 
+
+    @Column
+    @NotBlank
+    private String titulo; 
     
+    @NotBlank
+    @Column
+    private String texto; 
+
+    @Column
+    private int avaliacao;
 }

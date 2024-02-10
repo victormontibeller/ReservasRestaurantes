@@ -50,5 +50,8 @@ public class Reserva {
 
     @Column
     private int toleranciaMinutos;
+
+    @Column
+    private LocalDate horarioLimite;
     
 }
