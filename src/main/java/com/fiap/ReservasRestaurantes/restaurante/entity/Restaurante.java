@@ -2,15 +2,14 @@ package com.fiap.ReservasRestaurantes.restaurante.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,7 @@ import lombok.Setter;
 public class Restaurante {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private Long id; 
 
@@ -33,9 +33,9 @@ public class Restaurante {
     @Embedded
     private Endereco endereco;
 
-    @OneToMany
-    @JoinColumn(name = "horario_id", referencedColumnName = "id")
-    private Horario horario;
+    //@OneToOne
+    //@JoinColumn(name = "horario_id", referencedColumnName = "id")
+    //private Horario horario;
 
     @Column
     private int capacidade;

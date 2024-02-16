@@ -19,8 +19,9 @@ import lombok.Setter;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Endereco {
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+   //@GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(unique = true)
+   private long id;
 
    @Column(nullable = false)
    private String rua;
