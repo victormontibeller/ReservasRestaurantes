@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.cliente.repository.ClienteRepository;
-import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
-import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 
 @Service
 public class ClienteService {
@@ -19,7 +17,6 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     // add
-    @SuppressWarnings("null")
     public ClienteDTO inserirCliente(ClienteDTO ClienteDTO) {
         Cliente Cliente = toEntity(ClienteDTO);
 
@@ -41,7 +38,6 @@ public class ClienteService {
     }
 
     // delete
-    @SuppressWarnings("null")
     public void excluirCliente(Long id) {
         clienteRepository.deleteById(id);
     }
@@ -56,22 +52,13 @@ public class ClienteService {
 
     public Cliente toEntity(ClienteDTO ClienteDTO) {
         // Convertendo ClienteDTO para Cliente
-        Cliente Cliente = new Cliente();
-        Cliente.setId(ClienteDTO.id());
-        Cliente.setNome(ClienteDTO.nome());
-        Cliente.setDataCadastro(ClienteDTO.dataCadastro());
-        Cliente.setEndereco(Cliente.getEndereco());
+        Cliente cliente = new Cliente();
+        cliente.setId(ClienteDTO.id());
+        cliente.setNome(ClienteDTO.nome());
+        cliente.setDataCadastro(ClienteDTO.dataCadastro());
+        cliente.setEndereco(ClienteDTO.endereco());
 
-        return Cliente;
-    }
-
-    // Métodos do negócio da classe
-    public Optional<ReservaDTO> solicitarReserva(long id, long restauranteId){
-        return null;        
-    } 
-
-    public boolean solicitarCancelarReserva(long reservaId){
-        return false;        
+        return cliente;
     }
 
 }

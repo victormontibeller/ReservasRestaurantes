@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +26,6 @@ public class ReservaController {
     private final ReservaService reservaService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservaController.class);
 
-    @Autowired
     public ReservaController(ReservaService reservaService){
         this.reservaService = reservaService;
     }

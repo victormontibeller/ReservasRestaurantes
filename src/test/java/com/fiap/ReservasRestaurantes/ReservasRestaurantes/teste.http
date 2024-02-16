@@ -24,11 +24,33 @@ content-type: application/json
 
 ###
 
+GET http://localhost:8080/clientes 
+
+
+###
+
 POST http://localhost:8080/clientes HTTP/1.1
 content-type: application/json
 
 {
   "nome": "João da Silva",
   "dataCadastro": "2024-02-16",
-  "endereco": {"id" : 1}
+  "endereco": {
+    "id": 1
+  }
+}
+
+###
+
+POST http://localhost:8080/comentarios HTTP/1.1
+content-type: application/json
+
+{
+  "titulo": "Mané da Silva",
+  "dataCriacao": "2024-02-16",
+  "texto" : "teste",
+  "avaliacao" : 5,
+  "cliente": {
+    "id": 1
+  }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
+import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,5 +56,8 @@ public class Reserva {
 
     @Column
     private LocalDate horarioLimite;
+
+    @Column
+    private StatusReservaEnum status; 
     
 }

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,6 +39,4 @@ public class Cliente {
     @Column
     private LocalDate dataCadastro;
 
-    //@Embedded
-    //private Endereco endereco;
 }

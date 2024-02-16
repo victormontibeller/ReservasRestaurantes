@@ -1,5 +1,7 @@
 package com.fiap.ReservasRestaurantes.comentario.entity;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 
@@ -40,4 +42,7 @@ public class Comentario {
 
     @Column
     private int avaliacao;
+
+    @Column
+    private LocalDate dataCriacao;
 }

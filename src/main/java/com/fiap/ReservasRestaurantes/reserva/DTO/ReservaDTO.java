@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
+import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 
 public record ReservaDTO(
     long id,
@@ -14,7 +15,8 @@ public record ReservaDTO(
     LocalDate dataCriacao,
     LocalDate inicioReserva,
     int toleranciaMinutos,
-    LocalDate horarioLimite
+    LocalDate horarioLimite,
+    StatusReservaEnum status
 ){
 
 }

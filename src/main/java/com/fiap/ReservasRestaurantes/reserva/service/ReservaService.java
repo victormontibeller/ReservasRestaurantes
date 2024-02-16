@@ -17,7 +17,6 @@ public class ReservaService {
     private ReservaRepository reservaRepository;
 
     // add
-    @SuppressWarnings("null")
     public ReservaDTO inserirReserva(ReservaDTO reservaDTO) {
         Reserva reserva = toEntity(reservaDTO);
 
@@ -34,13 +33,11 @@ public class ReservaService {
     }
 
     // read
-    @SuppressWarnings("null")
     public Optional<Reserva> buscarReserva(Long id) {
         return reservaRepository.findById(id);
     }
 
     // delete
-    @SuppressWarnings("null")
     public void excluirReserva(Long id) {
         reservaRepository.deleteById(id);
     }
@@ -55,7 +52,8 @@ public class ReservaService {
                 reserva.getDataCriacao(),
                 reserva.getInicioReserva(),
                 reserva.getToleranciaMinutos(),
-                reserva.getHorarioLimite());
+                reserva.getHorarioLimite(),
+                reserva.getStatus());
     }
 
     public Reserva toEntity(ReservaDTO reservaDTO) {
@@ -73,4 +71,26 @@ public class ReservaService {
 
         return reserva;
     }
+
+    // Métodos do negócio da classe
+    public Optional<List<ReservaDTO>> buscarReservaPorRestaurante(long restauranteId) {
+        return null;
+    }
+
+    public Optional<List<ReservaDTO>> buscarReservaPorCliente(long restauranteId, long clienteId) {
+        return null;
+    }
+
+    public void cancelarTodasReservasPorRestaurante(long restauranteId) {
+
+    }
+
+    public void cancelarTodasReservaPorRestaurante(long restauranteId, long clienteId) {
+
+    }
+
+    public Optional<List<ReservaDTO>> excluirReservasExpiradas(long restauranteId) {
+        return null;
+    }
+
 }

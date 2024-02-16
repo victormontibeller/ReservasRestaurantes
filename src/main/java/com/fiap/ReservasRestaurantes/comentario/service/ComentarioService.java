@@ -51,7 +51,8 @@ public class ComentarioService {
                 comentario.getCliente(),
                 comentario.getTitulo(),
                 comentario.getTexto(),
-                comentario.getAvaliacao());
+                comentario.getAvaliacao(),
+                comentario.getDataCriacao());
     }
 
     public Comentario toEntity(ComentarioDTO comentarioDTO) {
@@ -63,6 +64,7 @@ public class ComentarioService {
         comentario.setTitulo(comentarioDTO.titulo());
         comentario.setTexto(comentarioDTO.texto());
         comentario.setAvaliacao(comentarioDTO.avaliacao());
+        comentario.setDataCriacao(comentarioDTO.dataCriacao());
 
         return comentario;
     }

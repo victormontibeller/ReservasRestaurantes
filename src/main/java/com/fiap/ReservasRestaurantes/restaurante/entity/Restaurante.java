@@ -1,11 +1,10 @@
 package com.fiap.ReservasRestaurantes.restaurante.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,16 +32,13 @@ public class Restaurante {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    //@Embedded
-    //private Endereco endereco;
-
     @ManyToOne
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-    //@OneToOne
-    //@JoinColumn(name = "horario_id", referencedColumnName = "id")
-    //private Horario horario;
 
     @Column
     private int capacidade;
+
+    @Column
+    private StatusRestauranteEnum status;
 }
