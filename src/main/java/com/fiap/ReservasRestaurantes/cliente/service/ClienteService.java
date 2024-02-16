@@ -74,7 +74,4 @@ public class ClienteService {
         return false;        
     }
 
-    public ComentarioDTO enviarComentario(long id, ComentarioDTO comentarioDTO){        
-        return comentarioDTO;
-    }
 }

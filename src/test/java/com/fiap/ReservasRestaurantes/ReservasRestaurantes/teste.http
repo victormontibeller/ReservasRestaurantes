@@ -1,0 +1,34 @@
+### Variables
+
+GET http://localhost:8080/clientes
+
+###
+
+GET http://localhost:8080/enderecos
+
+###
+
+POST http://localhost:8080/enderecos HTTP/1.1
+content-type: application/json
+
+{
+    "rua": "Rua das Flores",
+    "numero": 123,
+    "bairro": "Centro",
+    "cidade": "Recife",
+    "estado": "SP",
+    "pais" : "BR",
+    "cep": "01000-000"
+  
+}
+
+###
+
+POST http://localhost:8080/clientes HTTP/1.1
+content-type: application/json
+
+{
+  "nome": "João da Silva",
+  "dataCadastro": "2024-02-16",
+  "endereco": {"id" : 1}
+}

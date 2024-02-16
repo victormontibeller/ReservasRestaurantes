@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +27,11 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long id; 
+    private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private Endereco endereco;
     //@NotBlank
     @Column
     private String nome;
@@ -35,6 +40,6 @@ public class Cliente {
     @Column
     private LocalDate dataCadastro;
 
-    @Embedded
-    private Endereco endereco;
+    //@Embedded
+    //private Endereco endereco;
 }
