@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
-import com.fiap.ReservasRestaurantes.comentario.servico.ComentarioService;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
+import com.fiap.ReservasRestaurantes.comentario.service.ComentarioService;
 
 @RestController
 @RequestMapping(value = "/comentarios")

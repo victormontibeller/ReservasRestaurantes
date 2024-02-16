@@ -1,10 +1,8 @@
 package com.fiap.ReservasRestaurantes.cliente.entity;
 
-
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.ReservasRestaurantes.comentario.entity.NotBlank;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 
 import jakarta.persistence.Column;
@@ -26,11 +24,11 @@ public class Cliente {
     @Column(unique = true)
     private long id; 
 
-    @NotBlank
+    //@NotBlank
     @Column
     private String nome;
 
-    @NotBlank
+    //@NotBlank
     @Column
     private LocalDate dataCadastro;
 

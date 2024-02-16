@@ -1,4 +1,4 @@
-package com.fiap.ReservasRestaurantes.comentario.servico;
+package com.fiap.ReservasRestaurantes.comentario.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +17,14 @@ public class ComentarioService {
     private ComentarioRepository comentarioRepository;
 
     // add
+    @SuppressWarnings("null")
     public ComentarioDTO inserirComentario(ComentarioDTO comentarioDTO) {
         Comentario comentario = toEntity(comentarioDTO);
 
-        // Salva o novo Modelo no repositório
+        // Salva o novo Comentario no repositório
         comentario = comentarioRepository.save(comentario);
 
-        // Retorna o novo modelo
+        // Retorna o novo comentario
         return toDTO(comentario);
     }
 
@@ -33,6 +34,7 @@ public class ComentarioService {
     }
 
     // read
+    @SuppressWarnings("null")
     public Optional<Comentario> buscarComentario(Long id) {
         return comentarioRepository.findById(id);
     }

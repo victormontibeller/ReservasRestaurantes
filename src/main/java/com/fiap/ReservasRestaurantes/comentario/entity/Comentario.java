@@ -28,10 +28,10 @@ public class Comentario {
     private Cliente cliente; 
 
     @Column
-    @NotBlank
+    //@NotBlank
     private String titulo; 
     
-    @NotBlank
+    //@NotBlank
     @Column
     private String texto; 
 
