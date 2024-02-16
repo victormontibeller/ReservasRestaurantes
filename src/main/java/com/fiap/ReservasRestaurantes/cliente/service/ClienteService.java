@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.cliente.repository.ClienteRepository;
+import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
+import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 
 @Service
 public class ClienteService {
@@ -34,8 +36,7 @@ public class ClienteService {
     }
 
     // read
-    @SuppressWarnings("null")
-    public Optional<Cliente> buscarCliente(Long id) {
+    public Optional<Cliente> buscarCliente(long id) {
         return clienteRepository.findById(id);
     }
 
@@ -55,7 +56,6 @@ public class ClienteService {
 
     public Cliente toEntity(ClienteDTO ClienteDTO) {
         // Convertendo ClienteDTO para Cliente
-
         Cliente Cliente = new Cliente();
         Cliente.setId(ClienteDTO.id());
         Cliente.setNome(ClienteDTO.nome());
@@ -63,5 +63,18 @@ public class ClienteService {
         Cliente.setEndereco(Cliente.getEndereco());
 
         return Cliente;
+    }
+
+    // Métodos do negócio da classe
+    public Optional<ReservaDTO> solicitarReserva(long id, long restauranteId){
+        return null;        
+    } 
+
+    public boolean solicitarCancelarReserva(long reservaId){
+        return false;        
+    }
+
+    public ComentarioDTO enviarComentario(long id, ComentarioDTO comentarioDTO){        
+        return comentarioDTO;
     }
 }

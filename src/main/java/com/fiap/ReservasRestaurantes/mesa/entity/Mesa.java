@@ -18,13 +18,16 @@ import jakarta.persistence.Table;
 public class Mesa {
     @Id
     @Column(unique = true)
-    private Long id; 
-
-    @Column(name = "qtd_lugares", nullable = false)
-    private int qtdLugares;
+    private long id; 
 
     @ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
+
+    @Column(name = "qtd_lugares", nullable = false)
+    private int qtdLugares;
+
+    @Column
+    private int status; // 0 - liberada; 1 - reservada
     
 }
