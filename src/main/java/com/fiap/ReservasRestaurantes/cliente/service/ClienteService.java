@@ -39,6 +39,12 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
+    // delete
+    @SuppressWarnings("null")
+    public void excluirCliente(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
     public ClienteDTO toDTO(Cliente Cliente) {
         return new ClienteDTO(
                 Cliente.getId(),

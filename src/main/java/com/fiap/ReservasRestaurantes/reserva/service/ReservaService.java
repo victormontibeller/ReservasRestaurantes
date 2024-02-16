@@ -39,6 +39,12 @@ public class ReservaService {
         return reservaRepository.findById(id);
     }
 
+    // delete
+    @SuppressWarnings("null")
+    public void excluirReserva(Long id) {
+        reservaRepository.deleteById(id);
+    }
+
     public ReservaDTO toDTO(Reserva reserva) {
         return new ReservaDTO(
                 reserva.getId(),

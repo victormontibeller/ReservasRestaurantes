@@ -39,6 +39,12 @@ public class HorarioService {
         return horarioRepository.findById(id);
     }
 
+    // delete
+    @SuppressWarnings("null")
+    public void excluirHorario(Long id) {
+        horarioRepository.deleteById(id);
+    }
+
     public HorarioDTO toDTO(Horario horario) {
         return new HorarioDTO(
                 horario.getId(),

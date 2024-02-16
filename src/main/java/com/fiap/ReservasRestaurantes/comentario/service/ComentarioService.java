@@ -39,6 +39,12 @@ public class ComentarioService {
         return comentarioRepository.findById(id);
     }
 
+    // delete
+    @SuppressWarnings("null")
+    public void excluirComentario(Long id) {
+        comentarioRepository.deleteById(id);
+    }
+
     public ComentarioDTO toDTO(Comentario comentario) {
         return new ComentarioDTO(
                 comentario.getId(),
