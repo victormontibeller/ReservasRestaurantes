@@ -12,7 +12,7 @@ POST http://localhost:8080/enderecos HTTP/1.1
 content-type: application/json
 
 {
-    "rua": "Rua das Flores",
+    "rua": "Rua das Rosas",
     "numero": 123,
     "bairro": "Centro",
     "cidade": "Recife",
@@ -21,6 +21,12 @@ content-type: application/json
     "cep": "01000-000"
   
 }
+###
+
+DELETE http://localhost:8080/enderecos/1
+###
+
+GET http://localhost:8080/enderecos/3
 
 ###
 
@@ -36,7 +42,7 @@ content-type: application/json
   "nome": "João da Silva",
   "dataCadastro": "2024-02-16",
   "endereco": {
-    "id": 1
+    "id": 2
   }
 }
 

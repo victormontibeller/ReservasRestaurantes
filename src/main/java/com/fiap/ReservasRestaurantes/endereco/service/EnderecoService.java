@@ -1,13 +1,15 @@
 package com.fiap.ReservasRestaurantes.endereco.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.endereco.exception.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.endereco.repository.EnderecoRepository;
 
 @Service
@@ -17,12 +19,16 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     // add
-    @SuppressWarnings("null")
     public EnderecoDTO inserirEndereco(EnderecoDTO enderecoDTO) {
         Endereco endereco = toEntity(enderecoDTO);
-
         // Salva o novo Endereco no repositório
-        endereco = enderecoRepository.save(endereco);
+        try {
+            endereco = enderecoRepository.save(endereco);
+        } catch (DataAccessException ex) {
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o endereço");
+        }catch (ConstraintViolationException ex){
+            new ResourceNotFoundException("Endereço já cadastrado");
+        }       
 
         // Retorna o novo endereco
         return toDTO(endereco);
@@ -34,15 +40,20 @@ public class EnderecoService {
     }
 
     // read
-    @SuppressWarnings("null")
-    public Optional<Endereco> buscarEndereco(Long id) {
-        return enderecoRepository.findById(id);
+    public Endereco buscarEndereco(Long id) throws ResourceNotFoundException {
+        Endereco endereco = enderecoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+        return endereco;
     }
 
     // delete
-    @SuppressWarnings("null")
-    public void excluirEndereco(Long id) {
-        enderecoRepository.deleteById(id);
+    public String excluirEndereco(Long id) {
+        try {
+            enderecoRepository.deleteById(id);
+        } catch (Exception e) {
+            new ResourceNotFoundException("Endereço não encontrado para este id :: " + id);
+        }
+        return "Endereço excluído com sucesso!";
     }
 
     public EnderecoDTO toDTO(Endereco endereco) {
@@ -54,8 +65,7 @@ public class EnderecoService {
                 endereco.getCidade(),
                 endereco.getEstado(),
                 endereco.getPais(),
-                endereco.getCep()    
-        );
+                endereco.getCep());
 
     }
 
@@ -74,4 +84,3 @@ public class EnderecoService {
     }
 
 }
-

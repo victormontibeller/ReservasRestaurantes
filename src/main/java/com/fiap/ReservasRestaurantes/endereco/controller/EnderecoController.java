@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.endereco.exception.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.endereco.service.EnderecoService;
 
 @RestController
@@ -36,7 +37,7 @@ public class EnderecoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Endereco>> buscarEndereco(@PathVariable long id) {
+    public ResponseEntity<Endereco> buscarEndereco(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(enderecoService.buscarEndereco(id));
     }
 
@@ -49,14 +50,8 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> excluirEndereco(@PathVariable long id) {
-        try {
-            enderecoService.excluirEndereco(id);
-            LOGGER.info("Endereco {} excluido com sucesso!", id);
-        } catch (Exception e) {
-            LOGGER.error("Não foi possível excluir a endereco {}!", id);
-            return new ResponseEntity<>("Não foi possível excluir o endereco!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("Endereço excluído com sucesso!", HttpStatus.OK);
+        String msg = enderecoService.excluirEndereco(id);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
 }
