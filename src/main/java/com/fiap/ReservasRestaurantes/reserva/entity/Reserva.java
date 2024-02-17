@@ -42,19 +42,19 @@ public class Reserva {
     @Column
     private int numPessoas;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate dataReserva;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate dataCriacao;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate inicioReserva;
 
     @Column
     private int toleranciaMinutos;
 
-    @Column
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate horarioLimite;
 
     @Column

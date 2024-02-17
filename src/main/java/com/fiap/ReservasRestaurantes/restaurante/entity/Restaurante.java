@@ -1,7 +1,10 @@
 package com.fiap.ReservasRestaurantes.restaurante.entity;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
 
 import jakarta.persistence.Column;
@@ -36,9 +39,16 @@ public class Restaurante {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
+    @ManyToOne
+    @JoinColumn(name = "horario_id", referencedColumnName = "id")
+    Horario horario;
+
     @Column
     private int capacidade;
 
     @Column
     private StatusRestauranteEnum status;
+
+    @Column(nullable = false, columnDefinition = "DATE")
+    LocalDate dataCadastro;
 }

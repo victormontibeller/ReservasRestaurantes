@@ -7,7 +7,7 @@ import com.fiap.ReservasRestaurantes.horario.entity.enumerations.TurnoEnum;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 public record HorarioDTO(
-        Long id,
+        long id,
         Restaurante restaurante,
         String nome,
         TurnoEnum almocoJantar,

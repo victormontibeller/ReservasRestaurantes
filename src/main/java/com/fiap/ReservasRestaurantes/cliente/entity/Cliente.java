@@ -36,7 +36,7 @@ public class Cliente {
     private String nome;
 
     //@NotBlank
-    @Column
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate dataCadastro;
 
 }

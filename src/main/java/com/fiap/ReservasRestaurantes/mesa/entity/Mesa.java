@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.mesa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +14,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 
 @Entity
 @Table(name = "mesa")
@@ -32,5 +38,8 @@ public class Mesa {
 
     @Column
     private int status; // 0 - liberada; 1 - reservada
+
+    @Column
+    private PosicaoMesaEnum posicao;
     
 }

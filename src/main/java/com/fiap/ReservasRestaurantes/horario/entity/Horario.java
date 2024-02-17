@@ -29,7 +29,7 @@ import lombok.Setter;
 public class Horario {
     @Id
     @Column(unique = true)
-    private Long id; 
+    private long id; 
 
     @ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
@@ -44,9 +44,9 @@ public class Horario {
     @Enumerated(EnumType.STRING)
     private DiaSemanaEnum diaSemana;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate inicioHorario;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate fimHorario;
 }
