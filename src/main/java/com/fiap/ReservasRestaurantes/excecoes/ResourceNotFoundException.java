@@ -1,4 +1,4 @@
-package com.fiap.ReservasRestaurantes.endereco.exception;
+package com.fiap.ReservasRestaurantes.excecoes;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

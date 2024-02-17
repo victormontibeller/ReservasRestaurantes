@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.endereco.exception.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.endereco.repository.EnderecoRepository;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 
 @Service
 public class EnderecoService {

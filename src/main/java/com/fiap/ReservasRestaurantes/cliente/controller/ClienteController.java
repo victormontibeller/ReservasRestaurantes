@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.cliente.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.cliente.service.ClienteService;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.cliente.controller.ClienteController;
 
 @RestController
@@ -37,7 +37,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Cliente>> buscarCliente(@PathVariable long id) {
+    public ResponseEntity<Cliente> buscarCliente(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(clienteService.buscarCliente(id));
     }
 
@@ -50,13 +50,8 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> excluirCliente(@PathVariable long id) {
-        try {
-            clienteService.excluirCliente(id);
-            LOGGER.info("Cliente {} excluido com sucesso!", id);
-        } catch (Exception e) {
-            LOGGER.error("Não foi possível excluir o cliente {}!", id);
-            return new ResponseEntity<>("Não foi possível excluir o cliente!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("Cliente excluido com sucesso!", HttpStatus.OK);
+        String msg = clienteService.excluirCliente(id);
+        LOGGER.info(msg);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 }

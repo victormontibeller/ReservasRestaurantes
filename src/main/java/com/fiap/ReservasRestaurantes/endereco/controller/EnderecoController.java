@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.endereco.exception.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.endereco.service.EnderecoService;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 
 @RestController
 @RequestMapping(value = "/enderecos")
@@ -51,6 +51,7 @@ public class EnderecoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> excluirEndereco(@PathVariable long id) {
         String msg = enderecoService.excluirEndereco(id);
+        LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 

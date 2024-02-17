@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.comentario.service.ComentarioService;
+import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.reserva.controller.ReservaController;
 
 @RestController
@@ -37,7 +39,7 @@ public class ComentarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Comentario>> buscarComentario(@PathVariable long id) {
+    public ResponseEntity<Comentario> buscarComentario(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(comentarioService.buscarComentario(id));
     }
 
@@ -50,13 +52,8 @@ public class ComentarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> excluirComentario(@PathVariable long id) {
-        try {
-            comentarioService.excluirComentario(id);
-            LOGGER.info("Comentário {} excluido com sucesso!", id);
-        } catch (Exception e) {
-            LOGGER.error("Não foi possível excluir o comentário {}!", id);
-            return new ResponseEntity<>("Não foi possível excluir o comentário!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("Comentário excluido com sucesso!", HttpStatus.OK);
+        String msg = comentarioService.excluirComentario(id);
+        LOGGER.info(msg);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 }

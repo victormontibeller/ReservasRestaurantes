@@ -3,12 +3,16 @@ package com.fiap.ReservasRestaurantes.comentario.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.comentario.repository.ComentarioRepository;
+import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 
 @Service
 public class ComentarioService {
@@ -17,12 +21,17 @@ public class ComentarioService {
     private ComentarioRepository comentarioRepository;
 
     // add
-    @SuppressWarnings("null")
     public ComentarioDTO inserirComentario(ComentarioDTO comentarioDTO) {
         Comentario comentario = toEntity(comentarioDTO);
 
         // Salva o novo Comentario no repositório
-        comentario = comentarioRepository.save(comentario);
+        try {
+            comentario = comentarioRepository.save(comentario);
+        } catch (DataAccessException ex) {
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o endereço");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Endereço já cadastrado");
+        }
 
         // Retorna o novo comentario
         return toDTO(comentario);
@@ -34,15 +43,20 @@ public class ComentarioService {
     }
 
     // read
-    @SuppressWarnings("null")
-    public Optional<Comentario> buscarComentario(Long id) {
-        return comentarioRepository.findById(id);
+    public Comentario buscarComentario(Long id) throws ResourceNotFoundException {
+        Comentario comentario = comentarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+        return comentario;
     }
 
     // delete
-    @SuppressWarnings("null")
-    public void excluirComentario(Long id) {
-        comentarioRepository.deleteById(id);
+    public String excluirComentario(Long id) {
+        try {
+            comentarioRepository.deleteById(id);
+        } catch (Exception e) {
+            new ResourceNotFoundException("Endereço não encontrado para este id :: " + id);
+        }
+        return "Endereço excluído com sucesso!";
     }
 
     public ComentarioDTO toDTO(Comentario comentario) {
@@ -68,6 +82,5 @@ public class ComentarioService {
 
         return comentario;
     }
-
 
 }
