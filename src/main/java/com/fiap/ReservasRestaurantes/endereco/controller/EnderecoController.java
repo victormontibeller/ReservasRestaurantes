@@ -49,7 +49,7 @@ public class EnderecoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirEndereco(@PathVariable long id) {
+    public ResponseEntity<String> excluirEndereco(@PathVariable long id) throws ResourceNotFoundException {
         String msg = enderecoService.excluirEndereco(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

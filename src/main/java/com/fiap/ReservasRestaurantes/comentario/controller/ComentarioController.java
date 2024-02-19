@@ -51,7 +51,7 @@ public class ComentarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirComentario(@PathVariable long id) {
+    public ResponseEntity<String> excluirComentario(@PathVariable long id) throws ResourceNotFoundException {
         String msg = comentarioService.excluirComentario(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

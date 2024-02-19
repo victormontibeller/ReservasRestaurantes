@@ -26,9 +26,9 @@ public class EnderecoService {
             endereco = enderecoRepository.save(endereco);
         } catch (DataAccessException ex) {
             new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o endereço");
-        }catch (ConstraintViolationException ex){
+        } catch (ConstraintViolationException ex) {
             new ResourceNotFoundException("Endereço já cadastrado");
-        }       
+        }
 
         // Retorna o novo endereco
         return toDTO(endereco);
@@ -47,11 +47,14 @@ public class EnderecoService {
     }
 
     // delete
-    public String excluirEndereco(Long id) {
+    public String excluirEndereco(Long id) throws ResourceNotFoundException {
         try {
-            enderecoRepository.deleteById(id);
+            Endereco endereco = enderecoRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+                    
+            enderecoRepository.deleteById(endereco.getId());
         } catch (Exception e) {
-            new ResourceNotFoundException("Endereço não encontrado para este id :: " + id);
+            throw new ResourceNotFoundException("Endereço não encontrado para este id :: " + id);
         }
         return "Endereço excluído com sucesso!";
     }

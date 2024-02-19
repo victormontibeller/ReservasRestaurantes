@@ -49,11 +49,14 @@ public class ClienteService {
     }
 
     // delete
-    public String excluirCliente(Long id) {
+    public String excluirCliente(Long id) throws ResourceNotFoundException {
         try {
-            clienteRepository.deleteById(id);
+            Cliente cliente = clienteRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+                    
+            clienteRepository.deleteById(cliente.getId());
         } catch (Exception e) {
-            new ResourceNotFoundException("Cliente não encontrado para este id :: " + id);
+            throw new ResourceNotFoundException("Cliente não encontrado para este id :: " + id);
         }
         return "Cliente excluído com sucesso!";
     }

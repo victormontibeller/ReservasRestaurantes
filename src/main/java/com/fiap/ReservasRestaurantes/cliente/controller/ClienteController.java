@@ -49,7 +49,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirCliente(@PathVariable long id) {
+    public ResponseEntity<String> excluirCliente(@PathVariable long id) throws ResourceNotFoundException {
         String msg = clienteService.excluirCliente(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

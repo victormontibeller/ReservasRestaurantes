@@ -45,18 +45,21 @@ public class ComentarioService {
     // read
     public Comentario buscarComentario(Long id) throws ResourceNotFoundException {
         Comentario comentario = comentarioRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Comentário não encontrado para este id :: " + id));
         return comentario;
     }
 
     // delete
-    public String excluirComentario(Long id) {
+    public String excluirComentario(Long id) throws ResourceNotFoundException {
         try {
-            comentarioRepository.deleteById(id);
+            Comentario comentario = comentarioRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+                    
+            comentarioRepository.deleteById(comentario.getId());
         } catch (Exception e) {
-            new ResourceNotFoundException("Endereço não encontrado para este id :: " + id);
+            throw new ResourceNotFoundException("Comentário não encontrado para este id :: " + id);
         }
-        return "Endereço excluído com sucesso!";
+        return "Comentário excluído com sucesso!";
     }
 
     public ComentarioDTO toDTO(Comentario comentario) {
@@ -71,7 +74,6 @@ public class ComentarioService {
 
     public Comentario toEntity(ComentarioDTO comentarioDTO) {
         // Convertendo ComentarioDTO para Comentario
-
         Comentario comentario = new Comentario();
         comentario.setId(comentarioDTO.id());
         comentario.setCliente(comentarioDTO.cliente());
