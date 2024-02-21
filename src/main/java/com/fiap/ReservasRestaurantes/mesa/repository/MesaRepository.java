@@ -15,8 +15,6 @@ public interface MesaRepository extends JpaRepository<Mesa, Long> {
 
     List<Mesa> findByRestauranteAndReservaDataReserva(Restaurante restaurante, LocalDate data);
 
-    List<Mesa> findByRestauranteAndReservaIsNullAndDataReserva(Restaurante restaurante, LocalDate dataReserva);
-
     List<Mesa> findByRestauranteAndReservaIsNullAndReservaDataReserva(Restaurante restaurante, LocalDate dataReserva);
 
 }
