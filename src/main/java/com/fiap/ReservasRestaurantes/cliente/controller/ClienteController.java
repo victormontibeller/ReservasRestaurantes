@@ -33,7 +33,11 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> buscarClientes() {
-        return ResponseEntity.ok().body(clienteService.buscarClientes());
+        List<Cliente> clientes = clienteService.buscarClientes();
+        if (clientes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -41,8 +45,25 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.buscarCliente(id));
     }
 
+    @GetMapping("/{email}/email")
+    public ResponseEntity<Cliente> buscarClientePorEmail(@PathVariable String email) throws ResourceNotFoundException {
+        return ResponseEntity.ok().body(clienteService.buscarClientePorEmail(email));
+    }
+
+    @GetMapping("/{nome}/nome")
+    public ResponseEntity<Cliente> buscarClientePorNome(@PathVariable String nome) throws ResourceNotFoundException {
+        return ResponseEntity.ok().body(clienteService.buscarClientePorNome(nome));
+    }
+
+    @GetMapping("/{parteDoNome}/parteDoNome")
+    public ResponseEntity<List<Cliente>> buscarClientePorParteDoNome(@PathVariable String parteDoNome)
+            throws ResourceNotFoundException {
+        return ResponseEntity.ok().body(clienteService.buscarClientePorParteDoNome(parteDoNome));
+    }
+
     @PostMapping
-    public ResponseEntity<ClienteDTO> inserirCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> inserirCliente(@RequestBody ClienteDTO clienteDTO)
+            throws ResourceNotFoundException {
         ClienteDTO clienteSalva = clienteService.inserirCliente(clienteDTO);
 
         return new ResponseEntity<>(clienteSalva, HttpStatus.CREATED);

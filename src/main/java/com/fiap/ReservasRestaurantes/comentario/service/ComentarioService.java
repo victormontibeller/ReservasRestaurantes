@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.comentario.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.comentario.repository.ComentarioRepository;
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 
 @Service

@@ -1,22 +1,22 @@
 package com.fiap.ReservasRestaurantes.horario.entity.enumerations;
 
 public enum DiaSemanaEnum {
-    DOMINGO("DOM"),
-    SEGUNDA("SEG"),
-    TERCA("TER"),
-    QUARTA("QUA"),
-    QUINTA("QUI"),
-    SEXTA("SEX"),
-    SABADO("SAB");
+    DOMINGO(1),
+    SEGUNDA(2),
+    TERCA(3),
+    QUARTA(4),
+    QUINTA(5),
+    SEXTA(6),
+    SABADO(7);
 
-    private final String abreviado;
+    private final int codigo;
     
-    DiaSemanaEnum(String abreviado) {
-        this.abreviado = abreviado;
+    DiaSemanaEnum(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getAbreviado() {
-        return abreviado;
+    public int getCodigo() {
+        return codigo;
     }
     
 }

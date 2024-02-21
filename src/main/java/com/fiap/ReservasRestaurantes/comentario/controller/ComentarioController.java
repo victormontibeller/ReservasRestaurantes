@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.comentario.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.comentario.service.ComentarioService;
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.reserva.controller.ReservaController;
 

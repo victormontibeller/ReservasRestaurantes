@@ -1,14 +1,18 @@
 package com.fiap.ReservasRestaurantes.reserva.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.reserva.repository.ReservaRepository;
+import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 @Service
 public class ReservaService {
@@ -38,14 +42,24 @@ public class ReservaService {
     }
 
     // delete
-    public void excluirReserva(Long id) {
-        reservaRepository.deleteById(id);
+    public String excluirReserva(Long id) throws ResourceNotFoundException {
+        try {
+            Reserva reserva = reservaRepository.findById(id)
+                    .orElseThrow(
+                            () -> new ResourceNotFoundException("Reserva não encontrado para este id :: " + id));
+
+            reservaRepository.deleteById(reserva.getId());
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Reserva não encontrado para este id :: " + id);
+        }
+        return "Reserva excluído com sucesso!";
     }
 
     public ReservaDTO toDTO(Reserva reserva) {
         return new ReservaDTO(
                 reserva.getId(),
                 reserva.getCliente(),
+                reserva.getRestaurante(),
                 reserva.getMesa(),
                 reserva.getNumPessoas(),
                 reserva.getDataReserva(),
@@ -61,6 +75,7 @@ public class ReservaService {
         Reserva reserva = new Reserva();
         reserva.setId(reservaDTO.id());
         reserva.setCliente(reservaDTO.cliente());
+        reserva.setRestaurante(reservaDTO.restaurante());
         reserva.setMesa(reservaDTO.mesa());
         reserva.setNumPessoas(reservaDTO.numPessoas());
         reserva.setDataReserva(reservaDTO.dataReserva());
@@ -72,7 +87,45 @@ public class ReservaService {
         return reserva;
     }
 
+    // public List<Reserva> encontrarReservasPorRestauranteEData(Restaurante
+    // restaurante, LocalDate data) {
+    // return reservaRepository.findByRestauranteIdAndDataReserva(restaurante,
+    // data);
+    // }
+
     // Métodos do negócio da classe
+    public List<Reserva> encontrarReservasPorRestauranteEData(Restaurante restaurante, LocalDate data)
+            throws ResourceNotFoundException {
+        List<Reserva> reservas = reservaRepository.findByRestauranteAndDataReserva(restaurante, data);
+        if (reservas.isEmpty()) {
+            throw new ResourceNotFoundException("Não há reservas cadastradas para o dia " + data
+                    + " para o restaurante " + restaurante.getId() + ".");
+        }
+        return reservas;
+    }
+
+    // Métodos do negócio da classe
+    public List<Reserva> encontrarReservasPorClienteEData(Cliente cliente, LocalDate data)
+            throws ResourceNotFoundException {
+        List<Reserva> reservas = reservaRepository.findByClienteAndDataReserva(cliente, data);
+        if (reservas.isEmpty()) {
+            throw new ResourceNotFoundException("Não há reservas cadastradas para o dia " + data
+                    + " para o cliente " + cliente.getId() + ".");
+        }
+        return reservas;
+    }
+
+    // Métodos do negócio da classe
+    public List<Reserva> encontrarReservasPorRestauranteEClienteEData(Restaurante restaurante, Cliente cliente, LocalDate data)
+            throws ResourceNotFoundException {
+        List<Reserva> reservas = reservaRepository.findByClienteAndDataReserva(cliente, data);
+        if (reservas.isEmpty()) {
+            throw new ResourceNotFoundException("Não há reservas cadastradas para o dia " + data
+                    + " para o cliente " + cliente.getId() + ".");
+        }
+        return reservas;
+    }
+
     public Optional<List<ReservaDTO>> buscarReservaPorRestaurante(long restauranteId) {
         return null;
     }
@@ -93,4 +146,24 @@ public class ReservaService {
         return null;
     }
 
+    // lista reservas ativas
+    public List<Reserva> reservasAtivas() {
+
+        return null;
+
+    }
+
+    // lista reservas ativas
+    public List<Reserva> listaReservasExpiradas() {
+
+        return null;
+
+    }
+
+    // lista reservas ativas
+    public List<Reserva> listaReservasPorCliente() {
+
+        return null;
+
+    }
 }

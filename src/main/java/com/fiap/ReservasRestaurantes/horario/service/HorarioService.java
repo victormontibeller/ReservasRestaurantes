@@ -1,11 +1,13 @@
 package com.fiap.ReservasRestaurantes.horario.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.horario.DTO.HorarioDTO;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.horario.repository.HorarioRepository;
@@ -17,12 +19,17 @@ public class HorarioService {
     private HorarioRepository horarioRepository;
 
     // add
-    @SuppressWarnings("null")
     public HorarioDTO inserirHorario(HorarioDTO horarioDTO) {
         Horario horario = toEntity(horarioDTO);
 
         // Salva o novo Horario no repositório
-        horario = horarioRepository.save(horario);
+        try {
+            horario = horarioRepository.save(horario);
+        } catch (DataAccessException ex) {
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o endereço");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Horário já cadastrado");
+        }
 
         // Retorna o novo horario
         return toDTO(horario);
@@ -34,21 +41,29 @@ public class HorarioService {
     }
 
     // read
-    @SuppressWarnings("null")
-    public Optional<Horario> buscarHorario(Long id) {
-        return horarioRepository.findById(id);
+    public Horario buscarHorario(Long id) throws ResourceNotFoundException {
+        Horario horario = horarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Horario não encontrado para este id :: " + id));
+        return horario;
     }
 
     // delete
-    @SuppressWarnings("null")
-    public void excluirHorario(Long id) {
-        horarioRepository.deleteById(id);
+    public String excluirHorario(Long id) throws ResourceNotFoundException {
+        try {
+            Horario horario = horarioRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Horario não encontrado para este id :: " + id));
+
+            horarioRepository.deleteById(horario.getId());
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Horario não encontrado para este id :: " + id);
+        }
+        return "Horario excluído com sucesso!";
     }
 
     public HorarioDTO toDTO(Horario horario) {
         return new HorarioDTO(
                 horario.getId(),
-                horario.getRestaurante(),
+                null,
                 horario.getNome(),
                 horario.getAlmocoJantar(),
                 horario.getDiaSemana(),
@@ -60,7 +75,7 @@ public class HorarioService {
         // Convertendo HorarioDTO para Horario
         Horario horario = new Horario();
         horario.setId(horarioDTO.id());
-        horario.setRestaurante(horarioDTO.restaurante());
+       // horario.setRestaurante(horarioDTO.restaurante());
         horario.setNome(horarioDTO.nome());
         horario.setAlmocoJantar(horarioDTO.almocoJantar());
         horario.setDiaSemana(horarioDTO.diaSemana());

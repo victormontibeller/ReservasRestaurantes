@@ -14,7 +14,7 @@ content-type: application/json
 {
     "rua": "Rua das Rosas",
     "numero": 123,
-    "bairro": "Centro",
+    "bairro": "Vila Maria",
     "cidade": "Recife",
     "estado": "SP",
     "pais" : "BR",
@@ -32,6 +32,21 @@ GET http://localhost:8080/enderecos/3
 
 GET http://localhost:8080/clientes 
 
+###
+
+GET http://localhost:8080/clientes/maria@gmail.com/email
+
+###
+
+GET http://localhost:8080/clientes/Alex da Silva/nome
+
+###
+
+GET http://localhost:8080/clientes/Maria/parteDoNome
+
+###
+
+GET http://localhost:8080/clientes/3
 
 ###
 
@@ -39,10 +54,11 @@ POST http://localhost:8080/clientes HTTP/1.1
 content-type: application/json
 
 {
-  "nome": "João da Silva",
+  "nome": "Maria Julia",
+  "email" : "maria@gmail.com",
   "dataCadastro": "2024-02-16",
   "endereco": {
-    "id": 2
+    "id": 1
   }
 }
 
@@ -60,3 +76,28 @@ content-type: application/json
     "id": 1
   }
 }
+
+###
+
+POST http://localhost:8080/restaurantes HTTP/1.1
+content-type: application/json
+
+{
+  "nome": "Manga Espada",
+  "endereco": {
+    "id": 1
+  },
+  "email": "restaurante@example.com",
+  "capacidade": 50,
+  "status": 0,
+  "dataCadastro": "2024-02-20",
+  "tipoCozinha" : "BRASILEIRA"
+}
+
+###
+
+GET http://localhost:8080/restaurantes/tipo-cozinha/BR
+
+###
+
+GET http://localhost:8080/restaurantes/cidade/João Pessoa

@@ -3,6 +3,7 @@ package com.fiap.ReservasRestaurantes.reserva.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
+import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.reserva.service.ReservaService;
+import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 @RestController
 @RequestMapping(value = "/reservas")
@@ -26,13 +30,13 @@ public class ReservaController {
     private final ReservaService reservaService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservaController.class);
 
-    public ReservaController(ReservaService reservaService){
+    public ReservaController(ReservaService reservaService) {
         this.reservaService = reservaService;
     }
 
     @GetMapping
     public ResponseEntity<List<Reserva>> buscarReservas() {
-        return ResponseEntity.ok().body(reservaService.buscarReservas());        
+        return ResponseEntity.ok().body(reservaService.buscarReservas());
     }
 
     @GetMapping("/{id}")
@@ -45,18 +49,36 @@ public class ReservaController {
         ReservaDTO reservaSalva = reservaService.inserirReserva(reservaDTO);
 
         return new ResponseEntity<>(reservaSalva, HttpStatus.CREATED);
-    } 
+    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirReserva(@PathVariable long id) {
-        try {
-            reservaService.excluirReserva(id);
-            LOGGER.info("Reserva {} excluida com sucesso!", id);
-        } catch (Exception e) {
-            LOGGER.error("Não foi possível excluir a reserva {}!", id);
-            return new ResponseEntity<>("Não foi possível excluir a reserva!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("Reserva excluida com sucesso!", HttpStatus.OK);
+    public ResponseEntity<String> excluirReserva(@PathVariable long id) throws ResourceNotFoundException {
+        String msg = reservaService.excluirReserva(id);
+        LOGGER.info(msg);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
-    
+
+    @GetMapping("/restaurante/{restauranteId}/data/{data}")
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEData(@PathVariable Long restauranteId,
+            @PathVariable String data) throws ResourceNotFoundException {
+
+        Restaurante restaurante = new Restaurante();
+        restaurante.setId(restauranteId);
+        LocalDate dataReserva = LocalDate.parse(data);
+
+        return ResponseEntity.ok().body(reservaService.encontrarReservasPorRestauranteEData(restaurante, dataReserva));
+    }
+
+    @GetMapping("/restaurante/{restauranteId}/cliente/{clienteId}/data/{data}")
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEClienteEData(@PathVariable Long restauranteId, @PathVariable Long clienteId,
+            @PathVariable String data) throws ResourceNotFoundException {
+
+        Restaurante restaurante = new Restaurante();
+        restaurante.setId(restauranteId);
+        Cliente cliente = new Cliente();
+        cliente.setId(clienteId);
+        LocalDate dataReserva = LocalDate.parse(data);
+
+        return ResponseEntity.ok().body(reservaService.encontrarReservasPorRestauranteEClienteEData(restaurante, cliente, dataReserva));
+    }
 }

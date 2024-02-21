@@ -2,7 +2,7 @@ package com.fiap.ReservasRestaurantes.restaurante.entity.enumerations;
 
 public enum StatusRestauranteEnum {
     ATIVO("0"),   
-    EXPIRADO("1"),
+    SUSPENSO("1"),
     EXCLUIDO("2");    
 
     private final String codigo;

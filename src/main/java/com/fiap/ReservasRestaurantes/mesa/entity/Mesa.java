@@ -2,9 +2,9 @@ package com.fiap.ReservasRestaurantes.mesa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
+import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,11 +27,18 @@ public class Mesa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long id; 
+    private long id;
+    
+    @Column
+    private String numero; 
 
-    @ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "reserva_id", referencedColumnName = "id")
+    private Reserva reserva;
 
     @Column(name = "qtd_lugares", nullable = false)
     private int qtdLugares;
