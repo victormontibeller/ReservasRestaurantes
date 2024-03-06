@@ -20,7 +20,8 @@ import lombok.Setter;
 public class Endereco {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+   @Column(unique = true)
+   private long id; 
 
    @Column(nullable = false)
    private String rua;
@@ -41,6 +42,6 @@ public class Endereco {
    private String pais;
 
    @Column(nullable = false)
-   private int cep;
+   private String cep;
 
 }
