@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.cliente.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarCliente(@PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<Cliente> buscarCliente(@PathVariable UUID id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(clienteService.buscarCliente(id));
     }
 
@@ -70,7 +71,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirCliente(@PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirCliente(@PathVariable UUID id) throws ResourceNotFoundException {
         String msg = clienteService.excluirCliente(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);
