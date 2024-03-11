@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.ReservasRestaurantes.comentario;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.contentOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
-import com.fiap.ReservasRestaurantes.cliente.repository.ClienteRepository;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.comentario.repository.ComentarioRepository;
 import com.fiap.ReservasRestaurantes.comentario.service.ComentarioService;

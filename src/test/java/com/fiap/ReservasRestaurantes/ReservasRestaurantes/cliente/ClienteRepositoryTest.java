@@ -1,4 +1,4 @@
-package com.fiap.ReservasRestaurantes.ReservasRestaurantes.cliente.clienteRepository;
+package com.fiap.ReservasRestaurantes.ReservasRestaurantes.cliente;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -107,8 +107,6 @@ class ClienteRepositoryTest {
     /**
      * buscarClientePorEmail test case.
      *
-     * @param  none
-     * @return         	none
      */
     @Test
     void buscarClientePorEmail() {
