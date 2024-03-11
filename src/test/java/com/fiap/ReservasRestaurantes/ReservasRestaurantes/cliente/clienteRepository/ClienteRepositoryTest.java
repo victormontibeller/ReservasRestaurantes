@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,7 +23,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.cliente.repository.ClienteRepository;
 import com.fiap.ReservasRestaurantes.cliente.service.ClienteService;
@@ -87,20 +89,78 @@ class ClienteRepositoryTest {
      * Test case for inserting a new client with the same email.
      */
     @Test
-    void inserirNovoClienteComMesmoEmail() {
+    void inserirNovoClienteComMesmoEmailErro() {
+        // Arrange
+        Cliente cliente = new Cliente();
+        cliente = criaClienteTeste();
+        Cliente clienteRepetido = new Cliente();
+        clienteRepetido = criaClienteTeste();
+
+        when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente));
+        when(clienteRepository.findById(clienteRepetido.getId())).thenReturn(Optional.of(clienteRepetido));
+
+        // Act
+        var clienteBusca = clienteRepository.findById(cliente.getId());
+        var clienteRepetidoBusca = clienteRepository.findById(clienteRepetido.getId());
+
+        // Assert
+        assertThrows(AssertionError.class, () -> assertEquals(clienteBusca, clienteRepetidoBusca));
+    }
+
+    /**
+     * buscarClientePorEmail test case.
+     *
+     * @param  none
+     * @return         	none
+     */
+    @Test
+    void buscarClientePorEmail() {
         // Arrange
         Cliente cliente = new Cliente();
         cliente = criaClienteTeste();
 
-        when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente));
+        when(clienteRepository.findByEmail(cliente.getEmail())).thenReturn(cliente);
 
         // Act
-        var clienteBusca = clienteRepository.findById(cliente.getId());
+        var buscarCliente = clienteRepository.findByEmail(cliente.getEmail());   
         // Assert
-        assertThat(clienteBusca).isPresent()
-                                .containsSame(cliente);
+
+        assertThat(buscarCliente.getEmail()).isEqualTo(cliente.getEmail());
+        assertThat(buscarCliente.getId()).isEqualTo(cliente.getId());
     }
 
+
+    /**
+     * A description of the entire Java function.
+     *
+     * @param  paramName	description of parameter
+     * @return         	description of return value
+     */
+    @Test
+    void buscarClientePorId() {
+        // Arrange
+        Cliente cliente = new Cliente();
+        cliente = criaClienteTeste();
+
+        when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente)); 
+
+        // Act
+        UUID idCliente = cliente.getId();
+        Cliente clienteOptional = clienteRepository.findById(idCliente).get();
+           
+        // Assert
+
+        assertTrue(clienteRepository.findById(cliente.getId()).isPresent());
+        assertEquals(clienteOptional, cliente);
+        assertThat(clienteOptional.getId()).isEqualTo(cliente.getId());
+    
+    }
+
+    /**
+     * Test for updating a client successfully.
+     *
+     * @throws ResourceNotFoundException
+     */
     @Test
     void  atualizarClienteComSucesso() throws ResourceNotFoundException {
         // Arrange
@@ -128,9 +188,30 @@ class ClienteRepositoryTest {
         assertNotEquals(clienteAtualizado, cliente);
     }    
 
+    /**
+     * DeletarClienteComSucesso function that tests the successful deletion of a client.
+     *
+     */
+    @Test
+    void DeletarClienteComSucesso() {
+        // Arrange
+        Cliente cliente = new Cliente();
+        cliente = criaClienteTeste();
 
+        when(clienteRepository.save(cliente)).thenReturn(cliente);
 
+        // Act
+        clienteRepository.delete(cliente);
+        
+        // Assert
+        verify(clienteRepository, times(1)).delete(cliente);
+    }
 
+    /**
+     * Creates and returns a test client with dummy data.
+     *
+     * @return         	the created test client
+     */
     Cliente criaClienteTeste() {
         Cliente cliente = new Cliente();
         cliente.setId(UUID.randomUUID());
