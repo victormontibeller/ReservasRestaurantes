@@ -1,11 +1,12 @@
 package com.fiap.ReservasRestaurantes.comentario.DTO;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 
 public record ComentarioDTO(
-    long id,     
+    UUID id,     
     Cliente cliente, 
     String titulo, 
     String texto, 

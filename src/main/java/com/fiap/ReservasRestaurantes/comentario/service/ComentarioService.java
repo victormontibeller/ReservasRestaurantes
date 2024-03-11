@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.comentario.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,14 @@ public class ComentarioService {
     }
 
     // read
-    public Comentario buscarComentario(Long id) throws ResourceNotFoundException {
+    public Comentario buscarComentario(UUID id) throws ResourceNotFoundException {
         Comentario comentario = comentarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Comentário não encontrado para este id :: " + id));
         return comentario;
     }
 
     // delete
-    public String excluirComentario(Long id) throws ResourceNotFoundException {
+    public String excluirComentario(UUID id) throws ResourceNotFoundException {
         try {
             Comentario comentario = comentarioRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));

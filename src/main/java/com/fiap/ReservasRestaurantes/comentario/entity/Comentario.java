@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.comentario.entity;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
@@ -13,11 +14,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "comentario")
@@ -26,7 +31,7 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long id; 
+    private UUID id; 
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")

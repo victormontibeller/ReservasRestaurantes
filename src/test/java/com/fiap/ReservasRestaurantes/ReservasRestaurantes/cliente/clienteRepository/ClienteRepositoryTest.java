@@ -67,8 +67,7 @@ class ClienteRepositoryTest {
     @Test
     void inserirNovoClienteComSucesso() throws ResourceNotFoundException {
         // Arrange
-        Cliente cliente = new Cliente();
-        cliente = criaClienteTeste();
+        Cliente cliente = criaClienteTeste();
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
         // Act
@@ -91,10 +90,8 @@ class ClienteRepositoryTest {
     @Test
     void inserirNovoClienteComMesmoEmailErro() {
         // Arrange
-        Cliente cliente = new Cliente();
-        cliente = criaClienteTeste();
-        Cliente clienteRepetido = new Cliente();
-        clienteRepetido = criaClienteTeste();
+        Cliente cliente = criaClienteTeste();
+        Cliente clienteRepetido = criaClienteTeste();
 
         when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente));
         when(clienteRepository.findById(clienteRepetido.getId())).thenReturn(Optional.of(clienteRepetido));
@@ -116,8 +113,7 @@ class ClienteRepositoryTest {
     @Test
     void buscarClientePorEmail() {
         // Arrange
-        Cliente cliente = new Cliente();
-        cliente = criaClienteTeste();
+        Cliente cliente = criaClienteTeste();
 
         when(clienteRepository.findByEmail(cliente.getEmail())).thenReturn(cliente);
 
@@ -130,18 +126,17 @@ class ClienteRepositoryTest {
     }
 
 
+
     /**
-     * A description of the entire Java function.
-     *
-     * @param  paramName	description of parameter
-     * @return         	description of return value
+     * 
+     * A test case to search for a Cliente by its ID.
      */
     @Test
     void buscarClientePorId() {
         // Arrange
-        Cliente cliente = new Cliente();
-        cliente = criaClienteTeste();
+        Cliente cliente = criaClienteTeste();
 
+        when(clienteRepository.save(cliente)).thenReturn(cliente);
         when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente)); 
 
         // Act
@@ -149,7 +144,6 @@ class ClienteRepositoryTest {
         Cliente clienteOptional = clienteRepository.findById(idCliente).get();
            
         // Assert
-
         assertTrue(clienteRepository.findById(cliente.getId()).isPresent());
         assertEquals(clienteOptional, cliente);
         assertThat(clienteOptional.getId()).isEqualTo(cliente.getId());
@@ -164,9 +158,8 @@ class ClienteRepositoryTest {
     @Test
     void  atualizarClienteComSucesso() throws ResourceNotFoundException {
         // Arrange
-        Cliente cliente = new Cliente();
-        Reserva reserva = new Reserva();
-        cliente = criaClienteTeste();     
+        Cliente cliente = criaClienteTeste();
+        Reserva reserva = new Reserva();     
         List<Reserva> reservas = List.of(reserva);
 
         String nome = "João";
@@ -195,8 +188,7 @@ class ClienteRepositoryTest {
     @Test
     void DeletarClienteComSucesso() {
         // Arrange
-        Cliente cliente = new Cliente();
-        cliente = criaClienteTeste();
+        Cliente cliente = criaClienteTeste();
 
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
