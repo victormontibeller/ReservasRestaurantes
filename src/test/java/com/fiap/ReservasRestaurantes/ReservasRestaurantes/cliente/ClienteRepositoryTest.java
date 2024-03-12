@@ -51,8 +51,6 @@ class ClienteRepositoryTest {
     /**
      * A teardown function to close the test environment.
      *
-     * @param  None
-     * @return         	None
      */
     @AfterEach
     void tearDown() throws Exception {
