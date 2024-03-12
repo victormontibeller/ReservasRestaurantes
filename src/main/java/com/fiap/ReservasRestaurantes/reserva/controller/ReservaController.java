@@ -60,7 +60,7 @@ public class ReservaController {
     }
 
     @GetMapping("/restaurante/{restauranteId}/data/{data}")
-    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEData(@PathVariable Long restauranteId,
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEData(@PathVariable UUID restauranteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         Restaurante restaurante = new Restaurante();
@@ -71,7 +71,7 @@ public class ReservaController {
     }
 
     @GetMapping("/restaurante/{restauranteId}/cliente/{clienteId}/data/{data}")
-    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEClienteEData(@PathVariable Long restauranteId, @PathVariable UUID clienteId,
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEClienteEData(@PathVariable UUID restauranteId, @PathVariable UUID clienteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         Restaurante restaurante = new Restaurante();

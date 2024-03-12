@@ -2,6 +2,7 @@ package com.fiap.ReservasRestaurantes.mesa.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +85,7 @@ public class MesaController {
     }
 
     @GetMapping("/restaurante/{restauranteId}/data/{data}")
-    public ResponseEntity<List<Mesa>> listarMesasReservadasPorRestauranteEData(@PathVariable Long restauranteId,
+    public ResponseEntity<List<Mesa>> listarMesasReservadasPorRestauranteEData(@PathVariable UUID restauranteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         LocalDate dataReserva = LocalDate.parse(data);
@@ -98,7 +99,7 @@ public class MesaController {
     }
 
     @GetMapping("/restaurante/{restauranteId}/nao-reservadas/data/{data}")
-    public ResponseEntity<List<Mesa>> listarMesasNaoReservadasPorRestauranteEData(@PathVariable Long restauranteId,
+    public ResponseEntity<List<Mesa>> listarMesasNaoReservadasPorRestauranteEData(@PathVariable UUID restauranteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         LocalDate dataReserva = LocalDate.parse(data);

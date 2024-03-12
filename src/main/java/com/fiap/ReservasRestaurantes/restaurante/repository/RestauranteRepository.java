@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.restaurante.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,7 @@ import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, UUID> {
     Restaurante findByEmail(String email);
 
     Restaurante findByNome(String nome);
