@@ -138,9 +138,6 @@ class MesaRepositoryTest {
             verify(mesaRepository, times(1)).delete(mesa);
     }
 
-
-
-
     /**
      * Creates a test mesa.
      *

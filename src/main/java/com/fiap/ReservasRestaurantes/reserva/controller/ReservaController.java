@@ -41,7 +41,7 @@ public class ReservaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Reserva>> buscarReserva(@PathVariable long id) {
+    public ResponseEntity<Optional<Reserva>> buscarReserva(@PathVariable UUID id) {
         return ResponseEntity.ok().body(reservaService.buscarReserva(id));
     }
 
@@ -53,7 +53,7 @@ public class ReservaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirReserva(@PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirReserva(@PathVariable UUID id) throws ResourceNotFoundException {
         String msg = reservaService.excluirReserva(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

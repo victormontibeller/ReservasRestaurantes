@@ -74,7 +74,7 @@ class ClienteRepositoryTest {
         var clienteSalvo = clienteRepository.save(cliente);
 
         // Assert
-        assertNotNull(cliente);
+        assertNotNull(clienteSalvo);
         assertEquals(cliente.getNome(), clienteSalvo.getNome());
         assertEquals(cliente.getDataCadastro(), clienteSalvo.getDataCadastro());
         assertEquals(cliente.getEmail(), clienteSalvo.getEmail());
