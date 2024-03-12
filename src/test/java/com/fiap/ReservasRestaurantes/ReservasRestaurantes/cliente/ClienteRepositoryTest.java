@@ -109,7 +109,7 @@ class ClienteRepositoryTest {
      *
      */
     @Test
-    void buscarClientePorEmail() {
+    void testeBuscarClientePorEmail() {
         // Arrange
         Cliente cliente = criaClienteTeste();
 

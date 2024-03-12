@@ -44,7 +44,7 @@ public class MesaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mesa> buscarMesa(@PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<Mesa> buscarMesa(@PathVariable UUID id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(mesaService.buscarMesa(id));
     }
     /*
@@ -78,7 +78,7 @@ public class MesaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirMesa(@PathVariable long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirMesa(@PathVariable UUID id) throws ResourceNotFoundException {
         String msg = mesaService.excluirMesa(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

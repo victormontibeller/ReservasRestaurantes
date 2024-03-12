@@ -1,7 +1,10 @@
 package com.fiap.ReservasRestaurantes.mesa.entity;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
+import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
@@ -14,11 +17,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "mesa")
@@ -27,7 +34,7 @@ public class Mesa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long id;
+    private UUID id;
     
     @Column
     private String numero; 
@@ -44,8 +51,8 @@ public class Mesa {
     private int qtdLugares;
 
     @Column
-    private int status; // 0 - liberada; 1 - reservada
-
+    private StatusOcupacaoMesa status;
+    
     @Column
     private PosicaoMesaEnum posicao;
     
