@@ -3,6 +3,7 @@ package com.fiap.ReservasRestaurantes.reserva.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,12 @@ public class ReservaService {
     }
 
     // read
-    public Optional<Reserva> buscarReserva(Long id) {
+    public Optional<Reserva> buscarReserva(UUID id) {
         return reservaRepository.findById(id);
     }
 
     // delete
-    public String excluirReserva(Long id) throws ResourceNotFoundException {
+    public String excluirReserva(UUID id) throws ResourceNotFoundException {
         try {
             Reserva reserva = reservaRepository.findById(id)
                     .orElseThrow(

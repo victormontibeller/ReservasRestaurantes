@@ -2,6 +2,7 @@ package com.fiap.ReservasRestaurantes.mesa.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -48,7 +49,7 @@ public class MesaService {
     }
 
     // read
-    public Mesa buscarMesa(Long id) throws ResourceNotFoundException {
+    public Mesa buscarMesa(UUID id) throws ResourceNotFoundException {
         Mesa mesa = mesaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mesa não encontrada para este id :: " + id));
         return mesa;
@@ -64,7 +65,7 @@ public class MesaService {
     }
 
     // delete
-    public String excluirMesa(Long id) throws ResourceNotFoundException {
+    public String excluirMesa(UUID id) throws ResourceNotFoundException {
         try {
             Mesa mesa = mesaRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Mesa não encontrada para este id :: " + id));

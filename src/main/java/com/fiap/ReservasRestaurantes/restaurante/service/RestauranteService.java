@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.restaurante.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -41,7 +42,7 @@ public class RestauranteService {
     }
 
     // read
-    public Restaurante buscarRestaurante(Long id) throws ResourceNotFoundException {
+    public Restaurante buscarRestaurante(UUID id) throws ResourceNotFoundException {
         Restaurante restaurante = restauranteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurante não encontrado para este id :: " + id));
         return restaurante;
@@ -71,7 +72,7 @@ public class RestauranteService {
     }
 
     // delete
-    public String excluirRestaurante(Long id) throws ResourceNotFoundException {
+    public String excluirRestaurante(UUID id) throws ResourceNotFoundException {
         try {
             Restaurante restaurante = restauranteRepository.findById(id)
                     .orElseThrow(

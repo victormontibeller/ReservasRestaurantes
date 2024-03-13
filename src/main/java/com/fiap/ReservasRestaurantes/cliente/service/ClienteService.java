@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.cliente.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -47,7 +48,7 @@ public class ClienteService {
     }
 
     // read
-    public Cliente buscarCliente(Long id) throws ResourceNotFoundException {
+    public Cliente buscarCliente(UUID id) throws ResourceNotFoundException {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado para este id :: " + id));
         return cliente;
@@ -77,11 +78,11 @@ public class ClienteService {
     }
 
     // delete
-    public String excluirCliente(Long id) throws ResourceNotFoundException {
+    public String excluirCliente(UUID id) throws ResourceNotFoundException {
         try {
             Cliente cliente = clienteRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado para este id :: " + id));
-
+            
             clienteRepository.deleteById(cliente.getId());
         } catch (Exception e) {
             throw new ResourceNotFoundException("Cliente não encontrado para este id :: " + id);

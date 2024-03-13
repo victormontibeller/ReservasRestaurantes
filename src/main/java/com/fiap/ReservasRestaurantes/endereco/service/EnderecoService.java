@@ -1,6 +1,7 @@
 package com.fiap.ReservasRestaurantes.endereco.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +41,14 @@ public class EnderecoService {
     }
 
     // read
-    public Endereco buscarEndereco(Long id) throws ResourceNotFoundException {
+    public Endereco buscarEndereco(UUID id) throws ResourceNotFoundException {
         Endereco endereco = enderecoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
         return endereco;
     }
 
     // delete
-    public String excluirEndereco(Long id) throws ResourceNotFoundException {
+    public String excluirEndereco(UUID id) throws ResourceNotFoundException {
         try {
             Endereco endereco = enderecoRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
