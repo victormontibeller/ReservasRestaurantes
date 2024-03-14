@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.comentario.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ public class ComentarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Comentario> buscarComentario(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<Comentario> buscarComentario(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(comentarioService.buscarComentario(id));
     }
 
@@ -50,7 +49,7 @@ public class ComentarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirComentario(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirComentario(@PathVariable long id) throws ResourceNotFoundException {
         String msg = comentarioService.excluirComentario(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

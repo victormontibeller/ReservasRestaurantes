@@ -10,7 +10,7 @@ import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEn
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 public record ReservaDTO(
-        UUID id,
+        long id,
         Cliente cliente,
         Restaurante restaurante,
         List<Mesa> mesa,

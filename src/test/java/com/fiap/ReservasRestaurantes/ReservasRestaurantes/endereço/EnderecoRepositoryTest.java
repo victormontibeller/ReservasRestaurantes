@@ -70,7 +70,7 @@ class EnderecoRepositoryTest {
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
         when(enderecoRepository.findById(endereco.getId())).thenReturn(Optional.of(endereco));
 
-        UUID idEndereco = endereco.getId();
+        long idEndereco = endereco.getId();
         Endereco enderecoSalvo = enderecoRepository.findById(idEndereco).get();
 
         assertTrue(enderecoRepository.findById(endereco.getId()).isPresent());
@@ -102,7 +102,7 @@ class EnderecoRepositoryTest {
      * @return         	the newly created Endereco object
      */
     Endereco criarEndereco() {
-        return new Endereco(UUID.randomUUID(), 
+        return new Endereco(0L,/* UUID.randomUUID(), */
                         "rua abc",     
                      123,
                      "Centro", 

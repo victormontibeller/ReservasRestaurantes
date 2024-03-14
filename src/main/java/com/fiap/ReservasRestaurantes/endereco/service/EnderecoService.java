@@ -41,14 +41,14 @@ public class EnderecoService {
     }
 
     // read
-    public Endereco buscarEndereco(UUID id) throws ResourceNotFoundException {
+    public Endereco buscarEndereco(long id) throws ResourceNotFoundException {
         Endereco endereco = enderecoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
         return endereco;
     }
 
     // delete
-    public String excluirEndereco(UUID id) throws ResourceNotFoundException {
+    public String excluirEndereco(long id) throws ResourceNotFoundException {
         try {
             Endereco endereco = enderecoRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));

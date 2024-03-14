@@ -140,7 +140,7 @@ class RestauranteRepositoryTest {
         List<Horario> horarios = List.of();
         List<Reserva> reservas = List.of();
         List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(UUID.randomUUID(), 
+        Endereco endereco = new Endereco(0L, 
                                      "rua abc",     
                                   123,
                                   "Centro", 
@@ -149,7 +149,7 @@ class RestauranteRepositoryTest {
                                     "Brasil", 
                                      "00000-000");
                                      
-        Restaurante restaurante = new Restaurante(UUID.randomUUID(),
+        Restaurante restaurante = new Restaurante(0L,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",

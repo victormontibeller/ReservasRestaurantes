@@ -31,7 +31,7 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private UUID id; 
+    private long id; 
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")

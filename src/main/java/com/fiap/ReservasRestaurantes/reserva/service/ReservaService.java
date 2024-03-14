@@ -38,12 +38,12 @@ public class ReservaService {
     }
 
     // read
-    public Optional<Reserva> buscarReserva(UUID id) {
+    public Optional<Reserva> buscarReserva(long id) {
         return reservaRepository.findById(id);
     }
 
     // delete
-    public String excluirReserva(UUID id) throws ResourceNotFoundException {
+    public String excluirReserva(long id) throws ResourceNotFoundException {
         try {
             Reserva reserva = reservaRepository.findById(id)
                     .orElseThrow(

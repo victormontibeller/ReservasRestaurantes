@@ -72,7 +72,7 @@ class ComentarioRepositoryTest {
         when(comentarioRepository.save(comentario)).thenReturn(comentario);
         when(comentarioRepository.findById(comentario.getId())).thenReturn(Optional.of(comentario)); 
 
-        UUID idComentario = comentario.getId();
+        long idComentario = comentario.getId();
         var comentarioSalvo = comentarioRepository.findById(idComentario);
 
         assertTrue(comentarioRepository.findById(comentario.getId()).isPresent());
@@ -102,7 +102,7 @@ class ComentarioRepositoryTest {
     Comentario criarComentarioTeste(){
 
         Comentario comentario = new Comentario();
-        comentario.setId(UUID.randomUUID());
+        comentario.setId(0L);
         comentario.setCliente(criaClienteTeste());
         comentario.setTitulo("Restaurante Bom");
         comentario.setTexto("Excelente");
@@ -119,11 +119,11 @@ class ComentarioRepositoryTest {
      */
     Cliente criaClienteTeste() {
         Cliente cliente = new Cliente();
-        cliente.setId(UUID.randomUUID());
+        cliente.setId(0L/* 0L */);
         cliente.setNome("João");
         cliente.setEmail("joao@example.com");
         cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(UUID.randomUUID(), 
+        cliente.setEndereco(new Endereco(0L, 
                         "rua abc",     
                      123,
                      "Centro", 

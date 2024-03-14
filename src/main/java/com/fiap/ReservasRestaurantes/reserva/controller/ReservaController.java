@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class ReservaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Reserva>> buscarReserva(@PathVariable UUID id) {
+    public ResponseEntity<Optional<Reserva>> buscarReserva(@PathVariable long id) {
         return ResponseEntity.ok().body(reservaService.buscarReserva(id));
     }
 
@@ -53,14 +52,14 @@ public class ReservaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirReserva(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirReserva(@PathVariable long id) throws ResourceNotFoundException {
         String msg = reservaService.excluirReserva(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
     @GetMapping("/restaurante/{restauranteId}/data/{data}")
-    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEData(@PathVariable UUID restauranteId,
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEData(@PathVariable long restauranteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         Restaurante restaurante = new Restaurante();
@@ -71,7 +70,7 @@ public class ReservaController {
     }
 
     @GetMapping("/restaurante/{restauranteId}/cliente/{clienteId}/data/{data}")
-    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEClienteEData(@PathVariable UUID restauranteId, @PathVariable UUID clienteId,
+    public ResponseEntity<List<Reserva>> listarReservasPorRestauranteEClienteEData(@PathVariable long restauranteId, @PathVariable long clienteId,
             @PathVariable String data) throws ResourceNotFoundException {
 
         Restaurante restaurante = new Restaurante();

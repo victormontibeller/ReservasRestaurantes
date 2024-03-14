@@ -12,7 +12,7 @@ import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusResta
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 public record RestauranteDTO(
-        UUID id,
+        long id,
         String nome,
         Endereco endereco,
         String email,

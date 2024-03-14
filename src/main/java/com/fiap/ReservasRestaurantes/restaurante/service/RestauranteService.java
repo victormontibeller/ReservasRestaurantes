@@ -42,7 +42,7 @@ public class RestauranteService {
     }
 
     // read
-    public Restaurante buscarRestaurante(UUID id) throws ResourceNotFoundException {
+    public Restaurante buscarRestaurante(long id) throws ResourceNotFoundException {
         Restaurante restaurante = restauranteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurante não encontrado para este id :: " + id));
         return restaurante;
@@ -72,7 +72,7 @@ public class RestauranteService {
     }
 
     // delete
-    public String excluirRestaurante(UUID id) throws ResourceNotFoundException {
+    public String excluirRestaurante(long id) throws ResourceNotFoundException {
         try {
             Restaurante restaurante = restauranteRepository.findById(id)
                     .orElseThrow(

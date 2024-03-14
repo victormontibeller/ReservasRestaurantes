@@ -11,7 +11,7 @@ import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, UUID> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
     Restaurante findByEmail(String email);
 
     Restaurante findByNome(String nome);

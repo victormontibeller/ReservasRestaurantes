@@ -38,7 +38,7 @@ public class Reserva {
     @Id
     @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id; 
+    private long id; 
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")

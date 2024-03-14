@@ -38,7 +38,7 @@ public class HorarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Horario> buscarHorario(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<Horario> buscarHorario(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(horarioService.buscarHorario(id));
     }
 
@@ -50,7 +50,7 @@ public class HorarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirHorario(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirHorario(@PathVariable long id) throws ResourceNotFoundException {
         try {
             horarioService.excluirHorario(id);
             LOGGER.info("Horário {} excluido com sucesso!", id);

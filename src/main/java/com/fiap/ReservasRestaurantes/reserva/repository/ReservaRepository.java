@@ -10,7 +10,7 @@ import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
-public interface ReservaRepository extends JpaRepository<Reserva, UUID> {
+public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     List<Reserva> findByRestauranteAndDataReserva(Restaurante restaurante, LocalDate dataReserva);
 
     List<Reserva> findByClienteAndDataReserva(Cliente cliente, LocalDate dataReserva);

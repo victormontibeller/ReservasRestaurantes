@@ -145,7 +145,7 @@ class MesaRepositoryTest {
      */
     Mesa createMesaTeste() {
 
-        return new Mesa(UUID.randomUUID(),
+        return new Mesa(0L,
                         "1",
                         criarRestauranteTeste(),
                         null,
@@ -162,7 +162,7 @@ class MesaRepositoryTest {
     Horario criarHorarioSuporte() {
         Restaurante restaurante = criarRestauranteTeste();
 
-        Horario horaRest = new Horario(UUID.randomUUID(),
+        Horario horaRest = new Horario(0L,
                                         restaurante,
                                         restaurante.getNome(),
                                         TurnoEnum.ALMOCO,
@@ -181,7 +181,7 @@ class MesaRepositoryTest {
         List<Horario> horarios = List.of();
         List<Reserva> reservas = List.of();
         List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(UUID.randomUUID(), 
+        Endereco endereco = new Endereco(0L, 
                                      "rua abc",     
                                   123,
                                   "Centro", 
@@ -190,7 +190,7 @@ class MesaRepositoryTest {
                                     "Brasil", 
                                      "00000-000");
                                      
-        Restaurante restaurante = new Restaurante(UUID.randomUUID(),
+        Restaurante restaurante = new Restaurante(0L,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",

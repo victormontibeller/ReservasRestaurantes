@@ -129,7 +129,7 @@ class ReservaRepositoryTest {
      */
     Reserva criaReservaTeste() {
         List<Mesa> mesas = List.of();
-        return new Reserva(UUID.randomUUID(),
+        return new Reserva(0L,
                     criarClienteTeste(),
                     criarRestauranteTeste(),
                     mesas,
@@ -149,11 +149,11 @@ class ReservaRepositoryTest {
      */
     Cliente criarClienteTeste() {
         Cliente cliente = new Cliente();
-        cliente.setId(UUID.randomUUID());
+        cliente.setId(0L);
         cliente.setNome("João");
         cliente.setEmail("joao@example.com");
         cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(UUID.randomUUID(), 
+        cliente.setEndereco(new Endereco(0L, 
                         "rua abc",     
                      123,
                      "Centro", 
@@ -173,7 +173,7 @@ class ReservaRepositoryTest {
         List<Horario> horarios = List.of();
         List<Reserva> reservas = List.of();
         List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(UUID.randomUUID(), 
+        Endereco endereco = new Endereco(0L, 
                                      "rua abc",     
                                   123,
                                   "Centro", 
@@ -182,7 +182,7 @@ class ReservaRepositoryTest {
                                     "Brasil", 
                                      "00000-000");
                                      
-        Restaurante restaurante = new Restaurante(UUID.randomUUID(),
+        Restaurante restaurante = new Restaurante(0L,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",

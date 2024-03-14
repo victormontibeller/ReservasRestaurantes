@@ -48,7 +48,7 @@ public class ClienteService {
     }
 
     // read
-    public Cliente buscarCliente(UUID id) throws ResourceNotFoundException {
+    public Cliente buscarCliente(long id) throws ResourceNotFoundException {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado para este id :: " + id));
         return cliente;
@@ -78,7 +78,7 @@ public class ClienteService {
     }
 
     // delete
-    public String excluirCliente(UUID id) throws ResourceNotFoundException {
+    public String excluirCliente(long id) throws ResourceNotFoundException {
         try {
             Cliente cliente = clienteRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado para este id :: " + id));

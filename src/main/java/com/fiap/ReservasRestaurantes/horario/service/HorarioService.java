@@ -42,14 +42,14 @@ public class HorarioService {
     }
 
     // read
-    public Horario buscarHorario(UUID id) throws ResourceNotFoundException {
+    public Horario buscarHorario(long id) throws ResourceNotFoundException {
         Horario horario = horarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Horario não encontrado para este id :: " + id));
         return horario;
     }
 
     // delete
-    public String excluirHorario(UUID id) throws ResourceNotFoundException {
+    public String excluirHorario(long id) throws ResourceNotFoundException {
         try {
             Horario horario = horarioRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Horario não encontrado para este id :: " + id));

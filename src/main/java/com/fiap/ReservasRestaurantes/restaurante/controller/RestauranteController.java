@@ -39,7 +39,7 @@ public class RestauranteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurante> buscarRestaurante(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<Restaurante> buscarRestaurante(@PathVariable long id) throws ResourceNotFoundException {
         return ResponseEntity.ok().body(restauranteService.buscarRestaurante(id));
     }
 
@@ -70,7 +70,7 @@ public class RestauranteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirRestaurante(@PathVariable UUID id) throws ResourceNotFoundException {
+    public ResponseEntity<String> excluirRestaurante(@PathVariable long id) throws ResourceNotFoundException {
         String msg = restauranteService.excluirRestaurante(id);
         LOGGER.info(msg);
         return new ResponseEntity<>(msg, HttpStatus.OK);

@@ -99,7 +99,7 @@ class ClienteRepositoryTest {
         var clienteRepetidoBusca = clienteRepository.findById(clienteRepetido.getId());
 
         // Assert
-        assertThrows(AssertionError.class, () -> assertEquals(clienteBusca, clienteRepetidoBusca));
+        assertThrows(AssertionError.class, () -> assertEquals(cliente, clienteRepetidoBusca));
     }
 
     /**
@@ -136,7 +136,7 @@ class ClienteRepositoryTest {
         when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente)); 
 
         // Act
-        UUID idCliente = cliente.getId();
+        long idCliente = cliente.getId();
         Cliente clienteOptional = clienteRepository.findById(idCliente).get();
            
         // Assert
@@ -202,11 +202,11 @@ class ClienteRepositoryTest {
      */
     Cliente criaClienteTeste() {
         Cliente cliente = new Cliente();
-        cliente.setId(UUID.randomUUID());
+        cliente.setId(0L/* UUID.randomUUID() */);
         cliente.setNome("João");
         cliente.setEmail("joao@example.com");
         cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(UUID.randomUUID(), 
+        cliente.setEndereco(new Endereco(0L/* UUID.randomUUID() */, 
                         "rua abc",     
                      123,
                      "Centro", 

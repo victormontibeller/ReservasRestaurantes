@@ -34,7 +34,7 @@ public class Mesa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private UUID id;
+    private long id;
     
     @Column
     private String numero; 
