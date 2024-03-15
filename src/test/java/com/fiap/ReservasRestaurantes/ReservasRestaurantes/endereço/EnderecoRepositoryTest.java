@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.endereco.repository.EnderecoRepository;
 import com.fiap.ReservasRestaurantes.endereco.service.EnderecoService;
@@ -51,7 +51,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void inserirNovoEnderecoComSucesso() {
-        Endereco endereco = criarEndereco();
+        Endereco endereco = TestHelper.criarEndereco();
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
 
         var enderecoSalvo = enderecoRepository.save(endereco);
@@ -66,7 +66,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void buscarEnderecoPorId() {
-        Endereco endereco = criarEndereco();
+        Endereco endereco = TestHelper.criarEndereco();
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
         when(enderecoRepository.findById(endereco.getId())).thenReturn(Optional.of(endereco));
 
@@ -85,7 +85,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void testeExcluirEnderecoPorId() {
-        Endereco endereco = criarEndereco();
+        Endereco endereco = TestHelper.criarEndereco();
 
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
 
@@ -96,19 +96,4 @@ class EnderecoRepositoryTest {
     }
 
 
-    /**
-     * A function to create and return a new Endereco object.
-     *
-     * @return         	the newly created Endereco object
-     */
-    Endereco criarEndereco() {
-        return new Endereco(0L,/* UUID.randomUUID(), */
-                        "rua abc",     
-                     123,
-                     "Centro", 
-                     "São Paulo",
-                     "SP", 
-                       "Brasil", 
-                        "00000-000");
-    }
 }

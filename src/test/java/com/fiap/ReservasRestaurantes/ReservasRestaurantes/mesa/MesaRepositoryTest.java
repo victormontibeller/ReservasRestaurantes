@@ -8,10 +8,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,19 +18,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.horario.entity.Horario;
-import com.fiap.ReservasRestaurantes.horario.entity.enumerations.DiaSemanaEnum;
-import com.fiap.ReservasRestaurantes.horario.entity.enumerations.TurnoEnum;
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
-import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
-import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa;
 import com.fiap.ReservasRestaurantes.mesa.repository.MesaRepository;
 import com.fiap.ReservasRestaurantes.mesa.service.MesaService;
-import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
-import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 class MesaRepositoryTest {
     
@@ -66,7 +55,7 @@ class MesaRepositoryTest {
     @Test
     void inserirMesaComSucesso() {
         
-        Mesa mesa = createMesaTeste();
+        Mesa mesa = TestHelper.createMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
 
         var result = mesaRepository.save(mesa);
@@ -82,7 +71,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarMesaPorId() {
-        Mesa mesa = createMesaTeste();
+        Mesa mesa = TestHelper.createMesaTeste();
 
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findById(mesa.getId())).thenReturn(Optional.of(mesa));
@@ -99,7 +88,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarTodasAsMesas() {
-        Mesa mesa = createMesaTeste();
+        Mesa mesa = TestHelper.createMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findAll()).thenReturn(List.of(mesa));
 
@@ -114,7 +103,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarMesaPorNumero() {
-        Mesa mesa = createMesaTeste();
+        Mesa mesa = TestHelper.createMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findByNumero(mesa.getNumero())).thenReturn(mesa);
 
@@ -130,78 +119,11 @@ class MesaRepositoryTest {
      */
     @Test
     void testeDeletarMesa() {
-        Mesa mesa = createMesaTeste();
+        Mesa mesa = TestHelper.createMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
 
         mesaRepository.delete(mesa);
 
             verify(mesaRepository, times(1)).delete(mesa);
-    }
-
-    /**
-     * Creates a test mesa.
-     *
-     * @return          a Mesa object representing the test mesa
-     */
-    Mesa createMesaTeste() {
-
-        return new Mesa(0L,
-                        "1",
-                        criarRestauranteTeste(),
-                        null,
-                        64,
-                        StatusOcupacaoMesa.OCUPADA,
-                        PosicaoMesaEnum.INTERNA);
-    }
-
-    /**
-     * Creates and returns a support schedule.
-     *
-     * @return  the support schedule created
-     */
-    Horario criarHorarioSuporte() {
-        Restaurante restaurante = criarRestauranteTeste();
-
-        Horario horaRest = new Horario(0L,
-                                        restaurante,
-                                        restaurante.getNome(),
-                                        TurnoEnum.ALMOCO,
-                                        DiaSemanaEnum.DOMINGO,
-                                        LocalDate.now(),
-                                        LocalDate.now());
-        return horaRest;
-    }
-
-    /**
-     * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
-     *
-     * @return         	the created restaurant
-     */
-    Restaurante criarRestauranteTeste() {
-        List<Horario> horarios = List.of();
-        List<Reserva> reservas = List.of();
-        List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(0L, 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
-                                     
-        Restaurante restaurante = new Restaurante(0L,
-                                                "Dois Irmaos",
-                                                endereco,
-                                                "doisIrmaos@doisIrmaos.com",
-                                                horarios,
-                                                reservas,
-                                                mesas,
-                                                TipoCozinhaEnum.INTERNACIONAL,
-                                                10,
-                                                StatusRestauranteEnum.ATIVO,
-                                                LocalDate.now()); 
-                                                    
-        return restaurante;
     }
 }

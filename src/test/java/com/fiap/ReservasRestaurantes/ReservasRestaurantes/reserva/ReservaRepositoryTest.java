@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
@@ -68,7 +69,7 @@ class ReservaRepositoryTest {
     @Test
     void inserirNovaReservaComSucesso() {
 
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criaReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         var novaReserva = reservaRepository.save(reserva);
@@ -84,7 +85,7 @@ class ReservaRepositoryTest {
     @Test
     void buscarReservaPorId() {
 
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criaReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findById(reserva.getId())).thenReturn(Optional.of(reserva));
 
@@ -99,7 +100,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void testeBuscarTodasAsReservas() {
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criaReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findAll()).thenReturn(List.of(reserva));
 
@@ -114,7 +115,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void removerReservaPorId() {
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criaReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         reservaRepository.delete(reserva);
@@ -122,79 +123,6 @@ class ReservaRepositoryTest {
         verify(reservaRepository, times(1)).delete(reserva);
     }
 
-    /**
-     * Creates a test reservation.
-     *
-     * @return         the test reservation
-     */
-    Reserva criaReservaTeste() {
-        List<Mesa> mesas = List.of();
-        return new Reserva(0L,
-                    criarClienteTeste(),
-                    criarRestauranteTeste(),
-                    mesas,
-                    2,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    10,
-                    LocalDate.now(),
-                    StatusReservaEnum.ATIVO);
-    }
-    
-    /**
-     * Creates and returns a test client with dummy data.
-     *
-     * @return         	the created test client
-     */
-    Cliente criarClienteTeste() {
-        Cliente cliente = new Cliente();
-        cliente.setId(0L);
-        cliente.setNome("João");
-        cliente.setEmail("joao@example.com");
-        cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(0L, 
-                        "rua abc",     
-                     123,
-                     "Centro", 
-                     "São Paulo",
-                     "SP", 
-                       "Brasil", 
-                        "00000-000"));
-        return cliente;
-    }
 
-    /**
-     * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
-     *
-     * @return         	the created restaurant
-     */
-    Restaurante criarRestauranteTeste() {
-        List<Horario> horarios = List.of();
-        List<Reserva> reservas = List.of();
-        List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(0L, 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
-                                     
-        Restaurante restaurante = new Restaurante(0L,
-                                                "Dois Irmaos",
-                                                endereco,
-                                                "doisIrmaos@doisIrmaos.com",
-                                                horarios,
-                                                reservas,
-                                                mesas,
-                                                TipoCozinhaEnum.INTERNACIONAL,
-                                                10,
-                                                StatusRestauranteEnum.ATIVO,
-                                                LocalDate.now()); 
-                                                    
-        return restaurante;
-    }
 
 }

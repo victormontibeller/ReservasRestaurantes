@@ -7,9 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,13 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.horario.entity.Horario;
-import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
-import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 import com.fiap.ReservasRestaurantes.restaurante.repository.RestauranteRepository;
 import com.fiap.ReservasRestaurantes.restaurante.service.RestauranteService;
 
@@ -59,7 +52,7 @@ class RestauranteRepositoryTest {
     @Test
     void inserirNovoRestauranteComSucesso() {
         
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
 
         var result = restauranteRepository.save(restaurante);
@@ -72,7 +65,7 @@ class RestauranteRepositoryTest {
 
     @Test
     void testeBuscarRestaurantePorId() {
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
         when(restauranteRepository.findById(restaurante.getId())).thenReturn(java.util.Optional.of(restaurante));
     
@@ -84,7 +77,7 @@ class RestauranteRepositoryTest {
 
     @Test
     void testeBuscarTodosRestaurantes() {
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
         when(restauranteRepository.findAll()).thenReturn(List.of(restaurante));
 
@@ -95,7 +88,7 @@ class RestauranteRepositoryTest {
 
     @Test
     void testeBuscarRestaurantePorNome() {
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
         when(restauranteRepository.findByNome(restaurante.getNome())).thenReturn(restaurante);
 
@@ -108,7 +101,7 @@ class RestauranteRepositoryTest {
 
     @Test
     void testeBuscarRestaurantePorEmail() {
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
         when(restauranteRepository.findByEmail(restaurante.getEmail())).thenReturn(restaurante);
 
@@ -122,7 +115,7 @@ class RestauranteRepositoryTest {
 
     @Test
     void testeDeletarRestaurante() {
-        Restaurante restaurante = criarRestauranteTeste();
+        Restaurante restaurante = TestHelper.criarRestauranteTeste();
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
 
         restauranteRepository.delete(restaurante);
@@ -131,37 +124,5 @@ class RestauranteRepositoryTest {
     }
 
 
-    /**
-     * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
-     *
-     * @return         	the created restaurant
-     */
-    Restaurante criarRestauranteTeste() {
-        List<Horario> horarios = List.of();
-        List<Reserva> reservas = List.of();
-        List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(0L, 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
-                                     
-        Restaurante restaurante = new Restaurante(0L,
-                                                "Dois Irmaos",
-                                                endereco,
-                                                "doisIrmaos@doisIrmaos.com",
-                                                horarios,
-                                                reservas,
-                                                mesas,
-                                                TipoCozinhaEnum.INTERNACIONAL,
-                                                10,
-                                                StatusRestauranteEnum.ATIVO,
-                                                LocalDate.now()); 
-                                                    
-        return restaurante;
-    }
 
 }
