@@ -55,7 +55,7 @@ class MesaRepositoryTest {
     @Test
     void inserirMesaComSucesso() {
         
-        Mesa mesa = TestHelper.createMesaTeste();
+        Mesa mesa = TestHelper.criarMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
 
         var result = mesaRepository.save(mesa);
@@ -71,7 +71,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarMesaPorId() {
-        Mesa mesa = TestHelper.createMesaTeste();
+        Mesa mesa = TestHelper.criarMesaTeste();
 
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findById(mesa.getId())).thenReturn(Optional.of(mesa));
@@ -88,7 +88,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarTodasAsMesas() {
-        Mesa mesa = TestHelper.createMesaTeste();
+        Mesa mesa = TestHelper.criarMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findAll()).thenReturn(List.of(mesa));
 
@@ -103,7 +103,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeBuscarMesaPorNumero() {
-        Mesa mesa = TestHelper.createMesaTeste();
+        Mesa mesa = TestHelper.criarMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
         when(mesaRepository.findByNumero(mesa.getNumero())).thenReturn(mesa);
 
@@ -119,7 +119,7 @@ class MesaRepositoryTest {
      */
     @Test
     void testeDeletarMesa() {
-        Mesa mesa = TestHelper.createMesaTeste();
+        Mesa mesa = TestHelper.criarMesaTeste();
         when(mesaRepository.save(mesa)).thenReturn(mesa);
 
         mesaRepository.delete(mesa);

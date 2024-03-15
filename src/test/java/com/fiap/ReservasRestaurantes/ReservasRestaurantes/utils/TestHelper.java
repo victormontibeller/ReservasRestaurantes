@@ -3,6 +3,9 @@ package com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
+
+import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
@@ -20,13 +23,18 @@ import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinha
 
 public class TestHelper {  
 
+    /**
+     * Creates and returns a test client with predefined information.
+     *
+     * @return         the test client created
+     */    
     public static Cliente criarClienteTeste() {
         Cliente cliente = new Cliente();
-        cliente.setId(0L/* UUID.randomUUID() */);
+        cliente.setId(0);
         cliente.setNome("João");
         cliente.setEmail("joao@example.com");
         cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(0L/* UUID.randomUUID() */, 
+        cliente.setEndereco(new Endereco(0L, 
                         "rua abc",     
                      123,
                      "Centro", 
@@ -37,14 +45,40 @@ public class TestHelper {
         return cliente;
     }
 
+    public static Cliente criarClienteTeste1() {
+        Cliente cliente1 = new Cliente();
+        cliente1.setId(1L);
+        cliente1.setNome("Paulinho");
+        cliente1.setEmail("Paulinho@example.com");
+        cliente1.setDataCadastro(LocalDate.now());
+        cliente1.setEndereco(new Endereco(1L, 
+                                      "rua abc1",     
+                                   1233,
+                                   "Centro1", 
+                                   "Caramuru",
+                                   "XX", 
+                                     "Brasil",
+                                      "00000-000"));
+        return cliente1;
+    }
+
+    public static ClienteDTO clienteDTO(Cliente cliente) {
+        return new ClienteDTO(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getDataCadastro(),
+                cliente.getEndereco());
+    }
+
     
     /**
      * A function to create and return a new Endereco object.
      *
      * @return         	the newly created Endereco object
      */
-    public static Endereco criarEndereco() {
-        return new Endereco(0L,/* UUID.randomUUID(), */
+    public static Endereco criarEnderecoTeste() {
+        return new Endereco(0L,
                         "rua abc",     
                      123,
                      "Centro", 
@@ -60,7 +94,7 @@ public class TestHelper {
      *
      * @return  horaRest
      */
-    public static Horario criarHorarioSuporte() {
+    public static Horario criarHorarioTeste() {
         Restaurante restaurante = criarRestauranteTeste();
 
         Horario horaRest = new Horario(0L,
@@ -106,12 +140,12 @@ public class TestHelper {
         return restaurante;
     }
 
-        /**
+    /**
      * Creates a test reservation.
      *
      * @return         the test reservation
      */
-    public static Reserva criaReservaTeste() {
+    public static Reserva criarReservaTeste() {
         List<Mesa> mesas = List.of();
         return new Reserva(0L,
                     criarClienteTeste(),
@@ -125,7 +159,13 @@ public class TestHelper {
                     LocalDate.now(),
                     StatusReservaEnum.ATIVO);
     }
-    public static Mesa createMesaTeste() {
+
+    /**
+     * Creates a test Mesa object.
+     *
+     * @return         the test Mesa object created
+     */
+    public static Mesa criarMesaTeste() {
 
         return new Mesa(0L,
                         "1",
@@ -136,7 +176,7 @@ public class TestHelper {
                         PosicaoMesaEnum.INTERNA);
     }
 
-        /**
+    /**
      * A method to create a test comment.
      *
      * @return         	the created test comment
@@ -153,5 +193,6 @@ public class TestHelper {
 
         return comentario;
     }
+
     
 }

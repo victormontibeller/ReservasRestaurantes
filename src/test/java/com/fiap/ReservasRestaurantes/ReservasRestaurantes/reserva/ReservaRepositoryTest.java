@@ -69,7 +69,7 @@ class ReservaRepositoryTest {
     @Test
     void inserirNovaReservaComSucesso() {
 
-        Reserva reserva = TestHelper.criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         var novaReserva = reservaRepository.save(reserva);
@@ -85,7 +85,7 @@ class ReservaRepositoryTest {
     @Test
     void buscarReservaPorId() {
 
-        Reserva reserva = TestHelper.criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findById(reserva.getId())).thenReturn(Optional.of(reserva));
 
@@ -100,7 +100,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void testeBuscarTodasAsReservas() {
-        Reserva reserva = TestHelper.criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findAll()).thenReturn(List.of(reserva));
 
@@ -115,7 +115,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void removerReservaPorId() {
-        Reserva reserva = TestHelper.criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         reservaRepository.delete(reserva);

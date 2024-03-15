@@ -47,7 +47,7 @@ class HorarioRepositoryTest {
      */
     @Test
     void testeInserirHorarioSucesso() {
-        Horario horario = TestHelper.criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
         when(horarioRepository.save(horario)).thenReturn(horario);
 
         var result = horarioRepository.save(horario);
@@ -62,7 +62,7 @@ class HorarioRepositoryTest {
 
     @Test
     void TesteBuscarHorarioPorId() {
-        Horario horario = TestHelper.criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
 
         when(horarioRepository.save(horario)).thenReturn(horario);
         when(horarioRepository.findById(horario.getId())).thenReturn(Optional.of(horario));
@@ -79,7 +79,7 @@ class HorarioRepositoryTest {
      */
     @Test
     void TesteDeletarHorarioPorId() {
-        Horario horario = TestHelper.criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
         when(horarioRepository.save(horario)).thenReturn(horario);
         
         horarioRepository.delete(horario);

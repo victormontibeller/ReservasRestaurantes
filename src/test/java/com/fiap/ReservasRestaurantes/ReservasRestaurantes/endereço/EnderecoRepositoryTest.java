@@ -51,7 +51,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void inserirNovoEnderecoComSucesso() {
-        Endereco endereco = TestHelper.criarEndereco();
+        Endereco endereco = TestHelper.criarEnderecoTeste();
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
 
         var enderecoSalvo = enderecoRepository.save(endereco);
@@ -66,7 +66,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void buscarEnderecoPorId() {
-        Endereco endereco = TestHelper.criarEndereco();
+        Endereco endereco = TestHelper.criarEnderecoTeste();
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
         when(enderecoRepository.findById(endereco.getId())).thenReturn(Optional.of(endereco));
 
@@ -85,7 +85,7 @@ class EnderecoRepositoryTest {
      */
     @Test
     void testeExcluirEnderecoPorId() {
-        Endereco endereco = TestHelper.criarEndereco();
+        Endereco endereco = TestHelper.criarEnderecoTeste();
 
         when(enderecoRepository.save(endereco)).thenReturn(endereco);
 
