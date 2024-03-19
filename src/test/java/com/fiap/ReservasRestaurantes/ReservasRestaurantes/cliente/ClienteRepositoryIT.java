@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class ClienteRepositoryIT {
     void devePermitirCriarTabela() {
         assertDoesNotThrow(() -> { // Check for unhandled exceptions
             var totalRegistros = clienteRepository.count();
-            assertNotNull(totalRegistros, "totalRegistros should not be null"); // Check for null pointer references
+            assertNotNull(totalRegistros, "totalRegistros não pode ser nulo"); // Check for null pointer references
             assertThat(totalRegistros).isGreaterThanOrEqualTo(0);
         });
     }
@@ -116,7 +115,6 @@ public class ClienteRepositoryIT {
 
         assertThrows(ResourceNotFoundException.class, () -> {
             clienteService.buscarCliente(clienteSalvo.id());
-        });
-        
+        });   
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
 
 import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
+import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
@@ -192,6 +193,40 @@ public class TestHelper {
         comentario.setDataCriacao(LocalDate.now());
 
         return comentario;
+    }
+
+    /**
+     * A method to create a test comment.
+     *
+     * @return         	the created test comment
+     */
+    public static Comentario criarComentarioTeste1(){
+
+        Comentario comentario = new Comentario();
+        comentario.setId(1L);
+        comentario.setCliente(TestHelper.criarClienteTeste1());
+        comentario.setTitulo("Restaurante ruim");
+        comentario.setTexto("não servia pao de alho");
+        comentario.setAvaliacao(1);
+        comentario.setDataCriacao(LocalDate.now());
+
+        return comentario;
+    }
+
+    /**
+     * Converts a Comentario object to a ComentarioDTO object.
+     *
+     * @param  comentario   the Comentario object to convert
+     * @return              the converted ComentarioDTO object
+     */
+    public static ComentarioDTO toDTO(Comentario comentario) {
+        return new ComentarioDTO(
+                comentario.getId(),
+                comentario.getCliente(),
+                comentario.getTitulo(),
+                comentario.getTexto(),
+                comentario.getAvaliacao(),
+                comentario.getDataCriacao());
     }
 
     
