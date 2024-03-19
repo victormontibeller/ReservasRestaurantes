@@ -3,11 +3,9 @@ package com.fiap.ReservasRestaurantes.ReservasRestaurantes.cliente;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -68,22 +66,22 @@ public class ClienteRepositoryIT {
         assertThat(novoClienteBuscado.getId()).isEqualTo(novoClienteSalvo.id());
     }
 
-/*    @Test
-    void devePermitirBuscarTodosOsClientes() throws ResourceNotFoundException {
-        List<Cliente> todosOsClientes = Arrays.asList();
-//        todosOsClientes.add(TestHelper.criarClienteTeste());
-//        todosOsClientes.add(TestHelper.criarClienteTeste());
-        var novoCliente = TestHelper.clienteDTO(TestHelper.criarClienteTeste());
-        var novoClienteSalvo = clienteService.inserirCliente(novoCliente);
-        
-        var novoCliente1 = TestHelper.clienteDTO(TestHelper.criarClienteTeste1());
-        var novoClienteSalvo1 = clienteService.inserirCliente(novoCliente1);
+    @Test
+    void devePermitirBuscarTodosOsClientes() {
+        assertDoesNotThrow(() -> {
+            var novoCliente = TestHelper.clienteDTO(TestHelper.criarClienteTeste());
+            clienteService.inserirCliente(novoCliente);
+            
+            var novoCliente1 = TestHelper.clienteDTO(TestHelper.criarClienteTeste1());
+            clienteService.inserirCliente(novoCliente1);
+            
+            List<Cliente> todosOsClientesEncontrados = clienteService.buscarClientes();
+            
+            assertNotNull(todosOsClientesEncontrados); // Check for null pointer references
+            assertThat(todosOsClientesEncontrados).isNotEmpty();
+        });
+    }
 
-        todosOsClientes = clienteService.buscarClientes();
-
-        assertThat(todosOsClientes).isNotEmpty().isNotNull();
-        assertThat(todosOsClientes.size()).isEqualTo(2);
-    } */
 
     @Test
     void devePermitirBuscarClientesPorEmail() throws ResourceNotFoundException {
@@ -109,16 +107,16 @@ public class ClienteRepositoryIT {
         assertThat(novoClienteBuscado.getNome()).isEqualTo(novoClienteSalvo.nome());
     }
 
-    /*@Test
-    void devePermitirDeletarCliente() throws ResourceNotFoundException {
-        var novoCliente = TestHelper.criarClienteTeste();
-        var novoClienteDTO = TestHelper.clienteDTO(novoCliente);
-    
-        var novoClienteSalvo = clienteService.inserirCliente(novoClienteDTO);
-        clienteService.excluirCliente(novoCliente.getId());
+    @Test
+    void deveDeletarCliente() throws ResourceNotFoundException {
+        var cliente = TestHelper.criarClienteTeste();
+        var clienteDTO = TestHelper.clienteDTO(cliente);
+        var clienteSalvo = clienteService.inserirCliente(clienteDTO);
+        clienteService.excluirCliente(clienteSalvo.id());
 
-        assertThat(clienteService.buscarCliente(novoCliente.getId())).isNull();
-    }*/
-
-
+        assertThrows(ResourceNotFoundException.class, () -> {
+            clienteService.buscarCliente(clienteSalvo.id());
+        });
+        
+    }
 }

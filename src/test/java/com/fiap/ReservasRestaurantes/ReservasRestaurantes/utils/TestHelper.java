@@ -49,7 +49,7 @@ public class TestHelper {
         Cliente cliente1 = new Cliente();
         cliente1.setId(1L);
         cliente1.setNome("Paulinho");
-        cliente1.setEmail("Paulinho@example.com");
+        cliente1.setEmail("Paulinho@gmail.com");
         cliente1.setDataCadastro(LocalDate.now());
         cliente1.setEndereco(new Endereco(1L, 
                                       "rua abc1",     

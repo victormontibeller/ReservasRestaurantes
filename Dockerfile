@@ -11,6 +11,6 @@ FROM openjdk:17-jdk-slim
 
 COPY target/ReservasRestaurantes-0.0.1-SNAPSHOT.jar ReservasRestaurantes-0.0.1-SNAPSHOT.jar
 
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "ReservasRestaurantes-0.0.1-SNAPSHOT.jar"]

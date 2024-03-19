@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,7 +38,7 @@ public class Cliente {
     @Column(unique = true)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)//fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
    
