@@ -11,6 +11,7 @@ import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.horario.DTO.HorarioDTO;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.horario.entity.enumerations.DiaSemanaEnum;
 import com.fiap.ReservasRestaurantes.horario.entity.enumerations.TurnoEnum;
@@ -142,6 +143,37 @@ public class TestHelper {
                                         LocalDate.now());
         return horaRest;
     }
+
+    public static Horario criarHorarioTeste1() {
+        Restaurante restaurante = criarRestauranteTeste();
+
+        Horario horaRest = new Horario(0L,
+                                        restaurante,
+                                        restaurante.getNome(),
+                                        TurnoEnum.JANTAR,
+                                        DiaSemanaEnum.SEGUNDA,
+                                        LocalDate.now(),
+                                        LocalDate.now());
+        return horaRest;
+    }
+
+    /**
+     * Generates a HorarioDTO object based on the provided Horario object.
+     *
+     * @param  horario    the Horario object to convert
+     * @return            a new HorarioDTO object with mapped attributes
+     */
+    public static HorarioDTO horarioDTO(Horario horario) {
+    return new HorarioDTO(
+            horario.getId(),
+            null,
+            horario.getNome(),
+            horario.getAlmocoJantar(),
+            horario.getDiaSemana(),
+            horario.getInicioHorario(),
+            horario.getFimHorario());
+    }
+
 
     /**
      * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
