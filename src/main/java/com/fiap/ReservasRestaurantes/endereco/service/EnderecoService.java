@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.endereco.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;

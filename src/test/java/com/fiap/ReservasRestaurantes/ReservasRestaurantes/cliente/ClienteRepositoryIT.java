@@ -32,6 +32,12 @@ public class ClienteRepositoryIT {
     @Autowired
     private ClienteService clienteService;
 
+    /**
+     * Test case to verify if the table creation is allowed.
+     *
+     * @throws AssertionError if an unhandled exception occurs
+     * @throws NullPointerException if totalRegistros is null
+     */
     @Test
     void devePermitirCriarTabela() {
         assertDoesNotThrow(() -> { // Check for unhandled exceptions
@@ -41,6 +47,11 @@ public class ClienteRepositoryIT {
         });
     }
 
+  /**
+   * Test case for the method devePermitirInserirNovoCliente.
+   *
+   * @throws ResourceNotFoundException  if the resource is not found
+   */
     @Test 
     void devePermitirInserirNovoCliente() throws ResourceNotFoundException {
       var novoCliente = TestHelper.clienteDTO(TestHelper.criarClienteTeste());
@@ -54,6 +65,11 @@ public class ClienteRepositoryIT {
       assertThat(novoClienteSalvo.email()).isNotNull();
     }
 
+    /**
+     * devePermitirBuscarClientePorId function test case.
+     *
+     * @throws ResourceNotFoundException
+     */
     @Test
     void devePermitirBuscarClientePorId() throws ResourceNotFoundException {
         var novoCliente = TestHelper.clienteDTO(TestHelper.criarClienteTeste());
@@ -65,6 +81,12 @@ public class ClienteRepositoryIT {
         assertThat(novoClienteBuscado.getId()).isEqualTo(novoClienteSalvo.id());
     }
 
+    /**
+     * A test to verify that it allows searching for all clients.
+     *
+     * @param  none
+     * @return         	none
+     */
     @Test
     void devePermitirBuscarTodosOsClientes() {
         assertDoesNotThrow(() -> {
@@ -82,6 +104,11 @@ public class ClienteRepositoryIT {
     }
 
 
+    /**
+     * Test case to verify if searching for clients by email is allowed.
+     *
+     * @throws ResourceNotFoundException if the resource is not found
+     */
     @Test
     void devePermitirBuscarClientesPorEmail() throws ResourceNotFoundException {
 
@@ -94,6 +121,11 @@ public class ClienteRepositoryIT {
         assertThat(novoClienteBuscado.getEmail()).isEqualTo(novoClienteSalvo.email());
     }
 
+    /**
+     * Test case to verify if the search for a client by name is allowed.
+     *
+     * @throws ResourceNotFoundException  if the resource is not found
+     */
     @Test
     void devePermitirBuscarClientePorNome() throws ResourceNotFoundException {
         
@@ -106,6 +138,11 @@ public class ClienteRepositoryIT {
         assertThat(novoClienteBuscado.getNome()).isEqualTo(novoClienteSalvo.nome());
     }
 
+    /**
+     * Deletes a client and checks that the client is no longer retrievable.
+     *
+     * @throws ResourceNotFoundException if the client does not exist
+     */
     @Test
     void deveDeletarCliente() throws ResourceNotFoundException {
         var cliente = TestHelper.criarClienteTeste();

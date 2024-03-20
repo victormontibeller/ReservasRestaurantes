@@ -9,6 +9,7 @@ import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
+import com.fiap.ReservasRestaurantes.endereco.DTO.EnderecoDTO;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.horario.entity.enumerations.DiaSemanaEnum;
@@ -89,6 +90,40 @@ public class TestHelper {
                         "00000-000");
     }
 
+    /**
+     * A function to create and return a new Endereco object.
+     *
+     * @return         	the newly created Endereco object
+     */
+    public static Endereco criarEnderecoTeste1() {
+        return new Endereco(0L,
+                        "rua def",     
+                     123,
+                     "cidade das flores", 
+                     "Osasco",
+                     "SP", 
+                       "Brasil", 
+                        "00000-000");
+    }
+
+    /**
+     * Creates a new EnderecoDTO object based on the provided Endereco object.
+     *
+     * @param  endereco  the Endereco object to create the EnderecoDTO from
+     * @return           the newly created EnderecoDTO object
+     */
+    public static EnderecoDTO enderecoDTO(Endereco endereco) {
+        return new EnderecoDTO(
+                endereco.getId(),
+                endereco.getRua(),
+                endereco.getNumero(),
+                endereco.getBairro(),
+                endereco.getCidade(),
+                endereco.getEstado(),
+                endereco.getPais(),
+                endereco.getCep());
+
+    }
     
     /**
      * Cria um horario para os testes.
