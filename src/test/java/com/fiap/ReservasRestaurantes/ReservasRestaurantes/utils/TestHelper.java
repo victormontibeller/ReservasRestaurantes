@@ -15,6 +15,7 @@ import com.fiap.ReservasRestaurantes.horario.DTO.HorarioDTO;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.horario.entity.enumerations.DiaSemanaEnum;
 import com.fiap.ReservasRestaurantes.horario.entity.enumerations.TurnoEnum;
+import com.fiap.ReservasRestaurantes.mesa.DTO.MesaDTO;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa;
@@ -235,13 +236,44 @@ public class TestHelper {
      */
     public static Mesa criarMesaTeste() {
 
-        return new Mesa(0L,
+        return new Mesa(1L,
                         "1",
                         criarRestauranteTeste(),
-                        null,
+                        criarReservaTeste(),
                         64,
                         StatusOcupacaoMesa.OCUPADA,
                         PosicaoMesaEnum.INTERNA);
+    }
+
+    /**
+     * Creates a test Mesa object with specific attributes.
+     *
+     * @return         the Mesa object created for testing purposes
+     */
+    public static Mesa criarMesaTeste1() {
+        return new Mesa(1L,
+                        "2",
+                        criarRestauranteTeste(),
+                        criarReservaTeste(),
+                        4,
+                        StatusOcupacaoMesa.OCUPADA,
+                        PosicaoMesaEnum.INTERNA);
+    }
+
+    /**
+     * Converts a Mesa object to a MesaDTO object.
+     *
+     * @param  Mesa  the Mesa object to convert
+     * @return       a MesaDTO object
+     */
+    public static MesaDTO mesaDTO(Mesa Mesa) {
+        return new MesaDTO(
+                Mesa.getId(),
+                Mesa.getNumero(),
+                Mesa.getRestaurante(),
+                Mesa.getQtdLugares(),
+                Mesa.getStatus(),
+                Mesa.getPosicao());
     }
 
     /**
