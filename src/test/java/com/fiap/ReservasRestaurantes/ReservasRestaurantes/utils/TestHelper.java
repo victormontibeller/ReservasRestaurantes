@@ -20,6 +20,7 @@ import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa
 import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
+import com.fiap.ReservasRestaurantes.restaurante.DTO.RestauranteDTO;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
 import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
@@ -184,16 +185,9 @@ public class TestHelper {
         List<Horario> horarios = List.of();
         List<Reserva> reservas = List.of();
         List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(0L, 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
+        Endereco endereco = criarEnderecoTeste();
                                      
-        Restaurante restaurante = new Restaurante(0L,
+        Restaurante restaurante = new Restaurante(1,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",
@@ -206,6 +200,53 @@ public class TestHelper {
                                                 LocalDate.now()); 
                                                     
         return restaurante;
+    }
+
+    /**
+     * Creates a test restaurant with default values.
+     *
+     * @return          the test restaurant
+     */
+    public static Restaurante criarRestauranteTeste1() {
+        List<Horario> horarios = List.of();
+        List<Reserva> reservas = List.of();
+        List<Mesa> mesas = List.of();
+        Endereco endereco = criarEnderecoTeste1();
+                                     
+        Restaurante restaurante = new Restaurante(2L,
+                                                "Dois Irmaos",
+                                                endereco,
+                                                "doisIrmaos@doisIrmaos.com",
+                                                horarios,
+                                                reservas,
+                                                mesas,
+                                                TipoCozinhaEnum.INTERNACIONAL,
+                                                10,
+                                                StatusRestauranteEnum.ATIVO,
+                                                LocalDate.now()); 
+                                                    
+        return restaurante;
+    }
+
+    /**
+     * Creates a RestauranteDTO object from a Restaurante object.
+     *
+     * @param  restaurante  the Restaurante object to convert
+     * @return              the corresponding RestauranteDTO object
+     */
+        public static RestauranteDTO restauranteDTO(Restaurante restaurante) {
+        return new RestauranteDTO(
+                restaurante.getId(),
+                restaurante.getNome(),
+                restaurante.getEndereco(),
+                restaurante.getEmail(),
+                restaurante.getHorario(),
+                restaurante.getReserva(),
+                restaurante.getMesa(),
+                restaurante.getTipoCozinha(),
+                restaurante.getCapacidade(),
+                restaurante.getStatus(),
+                restaurante.getDataCadastro());
     }
 
     /**

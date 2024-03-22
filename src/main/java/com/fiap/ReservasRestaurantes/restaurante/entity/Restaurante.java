@@ -2,7 +2,6 @@ package com.fiap.ReservasRestaurantes.restaurante.entity;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;

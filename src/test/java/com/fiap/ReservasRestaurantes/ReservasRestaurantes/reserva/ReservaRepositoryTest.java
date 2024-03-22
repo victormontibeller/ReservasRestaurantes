@@ -7,10 +7,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,17 +18,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
-import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.horario.entity.Horario;
-import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
-import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 import com.fiap.ReservasRestaurantes.reserva.repository.ReservaRepository;
 import com.fiap.ReservasRestaurantes.reserva.service.ReservaService;
-import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 class ReservaRepositoryTest {
 
