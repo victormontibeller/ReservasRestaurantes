@@ -3,8 +3,6 @@ package com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
-
 import com.fiap.ReservasRestaurantes.cliente.DTO.ClienteDTO;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.comentario.DTO.ComentarioDTO;
@@ -19,6 +17,7 @@ import com.fiap.ReservasRestaurantes.mesa.DTO.MesaDTO;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa;
+import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
@@ -51,7 +50,7 @@ public class TestHelper {
 
     public static Cliente criarClienteTeste1() {
         Cliente cliente1 = new Cliente();
-        cliente1.setId(1L);
+        cliente1.setId(1);
         cliente1.setNome("Paulinho");
         cliente1.setEmail("Paulinho@gmail.com");
         cliente1.setDataCadastro(LocalDate.now());
@@ -216,7 +215,7 @@ public class TestHelper {
      */
     public static Reserva criarReservaTeste() {
         List<Mesa> mesas = List.of();
-        return new Reserva(0L,
+        return new Reserva(1L,
                     criarClienteTeste(),
                     criarRestauranteTeste(),
                     mesas,
@@ -228,6 +227,48 @@ public class TestHelper {
                     LocalDate.now(),
                     StatusReservaEnum.ATIVO);
     }
+
+    /**
+     * Creates a test reservation.
+     *
+     * @return         the test reservation
+     */
+    public static Reserva criarReservaTeste1() {
+        List<Mesa> mesas = List.of();
+        return new Reserva(2L,
+                    criarClienteTeste1(),
+                    criarRestauranteTeste(),
+                    mesas,
+                    2,
+                    LocalDate.now(),
+                    LocalDate.now(),
+                    LocalDate.now(),
+                    15,
+                    LocalDate.now(),
+                    StatusReservaEnum.ATIVO);
+    }
+    
+    /**
+     * Creates a ReservaDTO object based on the provided Reserva object.
+     *
+     * @param  reserva  the Reserva object containing the data for the ReservaDTO
+     * @return          the created ReservaDTO object
+     */
+    public static ReservaDTO reservaDTO(Reserva reserva) {
+        return new ReservaDTO(
+                reserva.getId(),
+                reserva.getCliente(),
+                reserva.getRestaurante(),
+                reserva.getMesa(),
+                reserva.getNumPessoas(),
+                reserva.getDataReserva(),
+                reserva.getDataCriacao(),
+                reserva.getInicioReserva(),
+                reserva.getToleranciaMinutos(),
+                reserva.getHorarioLimite(),
+                reserva.getStatus());
+    }
+
 
     /**
      * Creates a test Mesa object.

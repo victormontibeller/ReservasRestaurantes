@@ -3,9 +3,9 @@ package com.fiap.ReservasRestaurantes.reserva.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
@@ -42,18 +42,14 @@ public class ReservaService {
         return reservaRepository.findById(id);
     }
 
-    // delete
     public String excluirReserva(long id) throws ResourceNotFoundException {
-        try {
-            Reserva reserva = reservaRepository.findById(id)
-                    .orElseThrow(
-                            () -> new ResourceNotFoundException("Reserva não encontrado para este id :: " + id));
+        reservaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Reserva não encontrada para o id " + id));
 
-            reservaRepository.deleteById(reserva.getId());
-        } catch (Exception e) {
-            throw new ResourceNotFoundException("Reserva não encontrado para este id :: " + id);
-        }
-        return "Reserva excluído com sucesso!";
+        reservaRepository.deleteById(id);
+        return "Reserva excluída com sucesso!";
     }
 
     public ReservaDTO toDTO(Reserva reserva) {

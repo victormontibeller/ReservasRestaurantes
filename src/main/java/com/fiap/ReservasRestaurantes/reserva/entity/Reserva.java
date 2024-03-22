@@ -2,7 +2,6 @@ package com.fiap.ReservasRestaurantes.reserva.entity;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
@@ -10,6 +9,7 @@ import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,11 +40,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
 
