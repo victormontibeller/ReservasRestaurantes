@@ -8,10 +8,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,17 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;
-import com.fiap.ReservasRestaurantes.horario.entity.enumerations.DiaSemanaEnum;
-import com.fiap.ReservasRestaurantes.horario.entity.enumerations.TurnoEnum;
 import com.fiap.ReservasRestaurantes.horario.repository.HorarioRepository;
 import com.fiap.ReservasRestaurantes.horario.service.HorarioService;
-import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
-import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
-import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 class HorarioRepositoryTest {
 
@@ -57,7 +47,7 @@ class HorarioRepositoryTest {
      */
     @Test
     void testeInserirHorarioSucesso() {
-        Horario horario = criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
         when(horarioRepository.save(horario)).thenReturn(horario);
 
         var result = horarioRepository.save(horario);
@@ -72,7 +62,7 @@ class HorarioRepositoryTest {
 
     @Test
     void TesteBuscarHorarioPorId() {
-        Horario horario = criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
 
         when(horarioRepository.save(horario)).thenReturn(horario);
         when(horarioRepository.findById(horario.getId())).thenReturn(Optional.of(horario));
@@ -89,7 +79,7 @@ class HorarioRepositoryTest {
      */
     @Test
     void TesteDeletarHorarioPorId() {
-        Horario horario = criarHorarioSuporte();
+        Horario horario = TestHelper.criarHorarioTeste();
         when(horarioRepository.save(horario)).thenReturn(horario);
         
         horarioRepository.delete(horario);
@@ -97,54 +87,4 @@ class HorarioRepositoryTest {
         verify(horarioRepository, times(1)).delete(horario);
     }
 
-    /**
-     * Cria um horario para os testes.
-     *
-     * @return  horaRest
-     */
-    Horario criarHorarioSuporte() {
-        Restaurante restaurante = criarRestauranteTeste();
-
-        Horario horaRest = new Horario(UUID.randomUUID(),
-                                        restaurante,
-                                        restaurante.getNome(),
-                                        TurnoEnum.ALMOCO,
-                                        DiaSemanaEnum.DOMINGO,
-                                        LocalDate.now(),
-                                        LocalDate.now());
-        return horaRest;
-    }
-
-    /**
-     * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
-     *
-     * @return         	the created restaurant
-     */
-    Restaurante criarRestauranteTeste() {
-        List<Horario> horarios = List.of();
-        List<Reserva> reservas = List.of();
-        List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(UUID.randomUUID(), 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
-                                     
-        Restaurante restaurante = new Restaurante(UUID.randomUUID(),
-                                                "Dois Irmaos",
-                                                endereco,
-                                                "doisIrmaos@doisIrmaos.com",
-                                                horarios,
-                                                reservas,
-                                                mesas,
-                                                TipoCozinhaEnum.INTERNACIONAL,
-                                                10,
-                                                StatusRestauranteEnum.ATIVO,
-                                                LocalDate.now()); 
-                                                    
-        return restaurante;
-    }
 }

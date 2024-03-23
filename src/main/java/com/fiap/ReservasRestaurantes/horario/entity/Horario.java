@@ -32,7 +32,7 @@ import lombok.Setter;
 public class Horario {
     @Id
     @Column(unique = true)
-    private UUID id; 
+    private long id; 
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id")

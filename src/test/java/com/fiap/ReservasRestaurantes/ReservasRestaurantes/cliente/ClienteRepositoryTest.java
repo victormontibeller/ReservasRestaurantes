@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,7 +13,6 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,10 +21,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.cliente.repository.ClienteRepository;
 import com.fiap.ReservasRestaurantes.cliente.service.ClienteService;
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 
@@ -65,7 +63,7 @@ class ClienteRepositoryTest {
     @Test
     void inserirNovoClienteComSucesso() throws ResourceNotFoundException {
         // Arrange
-        Cliente cliente = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
         // Act
@@ -88,8 +86,8 @@ class ClienteRepositoryTest {
     @Test
     void inserirNovoClienteComMesmoEmailErro() {
         // Arrange
-        Cliente cliente = criaClienteTeste();
-        Cliente clienteRepetido = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
+        Cliente clienteRepetido = TestHelper.criarClienteTeste();
 
         when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente));
         when(clienteRepository.findById(clienteRepetido.getId())).thenReturn(Optional.of(clienteRepetido));
@@ -99,7 +97,7 @@ class ClienteRepositoryTest {
         var clienteRepetidoBusca = clienteRepository.findById(clienteRepetido.getId());
 
         // Assert
-        assertThrows(AssertionError.class, () -> assertEquals(clienteBusca, clienteRepetidoBusca));
+        assertThrows(AssertionError.class, () -> assertEquals(cliente, clienteRepetidoBusca));
     }
 
     /**
@@ -109,7 +107,7 @@ class ClienteRepositoryTest {
     @Test
     void testeBuscarClientePorEmail() {
         // Arrange
-        Cliente cliente = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
 
         when(clienteRepository.findByEmail(cliente.getEmail())).thenReturn(cliente);
 
@@ -130,13 +128,13 @@ class ClienteRepositoryTest {
     @Test
     void buscarClientePorId() {
         // Arrange
-        Cliente cliente = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
 
         when(clienteRepository.save(cliente)).thenReturn(cliente);
         when(clienteRepository.findById(cliente.getId())).thenReturn(Optional.of(cliente)); 
 
         // Act
-        UUID idCliente = cliente.getId();
+        long idCliente = cliente.getId();
         Cliente clienteOptional = clienteRepository.findById(idCliente).get();
            
         // Assert
@@ -154,7 +152,7 @@ class ClienteRepositoryTest {
     @Test
     void  atualizarClienteComSucesso() throws ResourceNotFoundException {
         // Arrange
-        Cliente cliente = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
         Reserva reserva = new Reserva();     
         List<Reserva> reservas = List.of(reserva);
 
@@ -184,7 +182,7 @@ class ClienteRepositoryTest {
     @Test
     void DeletarClienteComSucesso() {
         // Arrange
-        Cliente cliente = criaClienteTeste();
+        Cliente cliente = TestHelper.criarClienteTeste();
 
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
@@ -193,27 +191,5 @@ class ClienteRepositoryTest {
         
         // Assert
         verify(clienteRepository, times(1)).delete(cliente);
-    }
-
-    /**
-     * Creates and returns a test client with dummy data.
-     *
-     * @return         	the created test client
-     */
-    Cliente criaClienteTeste() {
-        Cliente cliente = new Cliente();
-        cliente.setId(UUID.randomUUID());
-        cliente.setNome("João");
-        cliente.setEmail("joao@example.com");
-        cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(UUID.randomUUID(), 
-                        "rua abc",     
-                     123,
-                     "Centro", 
-                     "São Paulo",
-                     "SP", 
-                       "Brasil", 
-                        "00000-000"));
-        return cliente;
     }
 }

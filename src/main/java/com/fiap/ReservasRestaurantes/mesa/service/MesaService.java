@@ -49,7 +49,7 @@ public class MesaService {
     }
 
     // read
-    public Mesa buscarMesa(UUID id) throws ResourceNotFoundException {
+    public Mesa buscarMesa(long id) throws ResourceNotFoundException {
         Mesa mesa = mesaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mesa não encontrada para este id :: " + id));
         return mesa;
@@ -65,7 +65,7 @@ public class MesaService {
     }
 
     // delete
-    public String excluirMesa(UUID id) throws ResourceNotFoundException {
+    public String excluirMesa(long id) throws ResourceNotFoundException {
         try {
             Mesa mesa = mesaRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Mesa não encontrada para este id :: " + id));

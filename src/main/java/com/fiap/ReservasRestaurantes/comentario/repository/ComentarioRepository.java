@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.fiap.ReservasRestaurantes.comentario.entity.Comentario;
 
 @Repository
-public interface ComentarioRepository extends JpaRepository<Comentario, UUID> { 
+public interface ComentarioRepository extends JpaRepository<Comentario, Long> { 
 
 }

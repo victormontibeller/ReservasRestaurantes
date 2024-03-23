@@ -7,10 +7,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,17 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
-import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
-import com.fiap.ReservasRestaurantes.horario.entity.Horario;
-import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
+import com.fiap.ReservasRestaurantes.ReservasRestaurantes.utils.TestHelper;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
-import com.fiap.ReservasRestaurantes.reserva.entity.enumerations.StatusReservaEnum;
 import com.fiap.ReservasRestaurantes.reserva.repository.ReservaRepository;
 import com.fiap.ReservasRestaurantes.reserva.service.ReservaService;
-import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.StatusRestauranteEnum;
-import com.fiap.ReservasRestaurantes.restaurante.entity.enumerations.TipoCozinhaEnum;
 
 class ReservaRepositoryTest {
 
@@ -68,7 +59,7 @@ class ReservaRepositoryTest {
     @Test
     void inserirNovaReservaComSucesso() {
 
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         var novaReserva = reservaRepository.save(reserva);
@@ -84,7 +75,7 @@ class ReservaRepositoryTest {
     @Test
     void buscarReservaPorId() {
 
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findById(reserva.getId())).thenReturn(Optional.of(reserva));
 
@@ -99,7 +90,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void testeBuscarTodasAsReservas() {
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
         when(reservaRepository.findAll()).thenReturn(List.of(reserva));
 
@@ -114,7 +105,7 @@ class ReservaRepositoryTest {
      */
     @Test
     void removerReservaPorId() {
-        Reserva reserva = criaReservaTeste();
+        Reserva reserva = TestHelper.criarReservaTeste();
         when(reservaRepository.save(reserva)).thenReturn(reserva);
 
         reservaRepository.delete(reserva);
@@ -122,79 +113,6 @@ class ReservaRepositoryTest {
         verify(reservaRepository, times(1)).delete(reserva);
     }
 
-    /**
-     * Creates a test reservation.
-     *
-     * @return         the test reservation
-     */
-    Reserva criaReservaTeste() {
-        List<Mesa> mesas = List.of();
-        return new Reserva(UUID.randomUUID(),
-                    criarClienteTeste(),
-                    criarRestauranteTeste(),
-                    mesas,
-                    2,
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    10,
-                    LocalDate.now(),
-                    StatusReservaEnum.ATIVO);
-    }
-    
-    /**
-     * Creates and returns a test client with dummy data.
-     *
-     * @return         	the created test client
-     */
-    Cliente criarClienteTeste() {
-        Cliente cliente = new Cliente();
-        cliente.setId(UUID.randomUUID());
-        cliente.setNome("João");
-        cliente.setEmail("joao@example.com");
-        cliente.setDataCadastro(LocalDate.now());
-        cliente.setEndereco(new Endereco(UUID.randomUUID(), 
-                        "rua abc",     
-                     123,
-                     "Centro", 
-                     "São Paulo",
-                     "SP", 
-                       "Brasil", 
-                        "00000-000"));
-        return cliente;
-    }
 
-    /**
-     * Create a test restaurant with empty schedules, reservations, and tables, and a randomly generated address. 
-     *
-     * @return         	the created restaurant
-     */
-    Restaurante criarRestauranteTeste() {
-        List<Horario> horarios = List.of();
-        List<Reserva> reservas = List.of();
-        List<Mesa> mesas = List.of();
-        Endereco endereco = new Endereco(UUID.randomUUID(), 
-                                     "rua abc",     
-                                  123,
-                                  "Centro", 
-                                  "São Paulo",
-                                  "SP", 
-                                    "Brasil", 
-                                     "00000-000");
-                                     
-        Restaurante restaurante = new Restaurante(UUID.randomUUID(),
-                                                "Dois Irmaos",
-                                                endereco,
-                                                "doisIrmaos@doisIrmaos.com",
-                                                horarios,
-                                                reservas,
-                                                mesas,
-                                                TipoCozinhaEnum.INTERNACIONAL,
-                                                10,
-                                                StatusRestauranteEnum.ATIVO,
-                                                LocalDate.now()); 
-                                                    
-        return restaurante;
-    }
 
 }

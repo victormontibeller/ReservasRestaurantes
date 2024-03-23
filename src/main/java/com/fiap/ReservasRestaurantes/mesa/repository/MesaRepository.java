@@ -11,7 +11,7 @@ import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.restaurante.entity.Restaurante;
 
 @Repository
-public interface MesaRepository extends JpaRepository<Mesa, UUID> {
+public interface MesaRepository extends JpaRepository<Mesa, Long> {
     Mesa findByNumero(String numero);
 
     List<Mesa> findByRestauranteAndReservaDataReserva(Restaurante restaurante, LocalDate data);

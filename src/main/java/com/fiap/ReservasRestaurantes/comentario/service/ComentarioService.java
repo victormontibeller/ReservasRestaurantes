@@ -42,14 +42,14 @@ public class ComentarioService {
     }
 
     // read
-    public Comentario buscarComentario(UUID id) throws ResourceNotFoundException {
+    public Comentario buscarComentario(long id) throws ResourceNotFoundException {
         Comentario comentario = comentarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Comentário não encontrado para este id :: " + id));
         return comentario;
     }
 
     // delete
-    public String excluirComentario(UUID id) throws ResourceNotFoundException {
+    public String excluirComentario(long id) throws ResourceNotFoundException {
         try {
             Comentario comentario = comentarioRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));

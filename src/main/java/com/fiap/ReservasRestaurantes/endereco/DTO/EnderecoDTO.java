@@ -3,7 +3,7 @@ package com.fiap.ReservasRestaurantes.endereco.DTO;
 import java.util.UUID;
 
 public record EnderecoDTO(
-        UUID id,
+        long id,
         String rua,
         int numero,
         String bairro,
