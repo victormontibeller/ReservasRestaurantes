@@ -4,9 +4,7 @@
 ## Tech Challenge FIAP - Fase 3 ##
 
 
-## Grupo: ##    Victor Luiz Montibeller;           
-                Tiago Germano Pereira;           
-                Rafael Sugahara Francisco;           
+## Grupo: ##    Victor Luiz Montibeller;              
                 Leonardo Arantes Di Nizo;           
                 Alexandre Marques;
 
