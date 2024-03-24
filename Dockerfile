@@ -1,8 +1,8 @@
 FROM maven:3.8.6-openjdk-17-slim AS build
 
-WORKDIR /mnt/c/Users/leona/OneDrive/Documentos/Estudos_em_java/TechChallenge_III
+WORKDIR /app
 
-COPY . /mnt/c/Users/leona/OneDrive/Documentos/Estudos_em_java/TechChallenge_III
+COPY . /app/
 
 RUN mvn package
 
