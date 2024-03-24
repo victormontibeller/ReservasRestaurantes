@@ -40,11 +40,11 @@ public class Mesa {
     @Column
     private String numero; 
 
-    @ManyToOne(cascade = CascadeType.ALL)//(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
 
-    @ManyToOne(cascade = CascadeType.ALL)//(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "reserva_id", referencedColumnName = "id")
     private Reserva reserva;
 

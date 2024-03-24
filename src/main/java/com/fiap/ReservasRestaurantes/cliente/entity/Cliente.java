@@ -38,7 +38,7 @@ public class Cliente {
     @Column(unique = true)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)//fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
    

@@ -40,11 +40,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
 

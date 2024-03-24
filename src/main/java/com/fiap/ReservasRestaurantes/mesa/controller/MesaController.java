@@ -36,11 +36,7 @@ public class MesaController {
 
     @GetMapping
     public ResponseEntity<List<Mesa>> buscarMesas() {
-        List<Mesa> mesas = mesaService.buscarMesas();
-        if (mesas.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(mesas, HttpStatus.OK);
+        return ResponseEntity.ok().body(mesaService.buscarMesas());
     }
 
     @GetMapping("/{id}")

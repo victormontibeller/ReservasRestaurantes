@@ -32,12 +32,8 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> buscarClientes() {
-        List<Cliente> clientes = clienteService.buscarClientes();
-        if (clientes.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    public ResponseEntity<List<Cliente>> buscarClientes() throws ResourceNotFoundException {
+        return ResponseEntity.ok().body(clienteService.buscarClientes());
     }
 
     @GetMapping("/{id}")
