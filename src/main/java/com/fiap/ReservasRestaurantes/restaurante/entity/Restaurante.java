@@ -46,7 +46,7 @@ public class Restaurante {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 

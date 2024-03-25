@@ -29,7 +29,6 @@ public class ClienteService {
                     "Email " + cliente.getEmail() + " já está cadastrado para o cliente de Id=" + clienteDB.getId()
                             + ".");
         }
-        cliente = clienteRepository.save(cliente);
 
         try {
             cliente = clienteRepository.save(cliente);
@@ -42,8 +41,12 @@ public class ClienteService {
     }
 
     // read all
-    public List<Cliente> buscarClientes() {
-        return clienteRepository.findAll();
+    public List<Cliente> buscarClientes() throws ResourceNotFoundException {
+        List<Cliente> cliente = clienteRepository.findAll();
+        if (cliente.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum cliente encontrado.");
+        }
+        return cliente;
     }
 
     // read
