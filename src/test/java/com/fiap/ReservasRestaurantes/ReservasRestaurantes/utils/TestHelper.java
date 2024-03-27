@@ -34,7 +34,7 @@ public class TestHelper {
      */    
     public static Cliente criarClienteTeste() {
         Cliente cliente = new Cliente();
-        cliente.setId(0);
+        cliente.setId(0L);
         cliente.setNome("João");
         cliente.setEmail("joao@example.com");
         cliente.setDataCadastro(LocalDate.now());
@@ -51,11 +51,11 @@ public class TestHelper {
 
     public static Cliente criarClienteTeste1() {
         Cliente cliente1 = new Cliente();
-        cliente1.setId(1);
+        cliente1.setId(0L);
         cliente1.setNome("Paulinho");
         cliente1.setEmail("Paulinho@gmail.com");
         cliente1.setDataCadastro(LocalDate.now());
-        cliente1.setEndereco(new Endereco(1L, 
+        cliente1.setEndereco(new Endereco(0L, 
                                       "rua abc1",     
                                    1233,
                                    "Centro1", 
@@ -187,7 +187,7 @@ public class TestHelper {
         List<Mesa> mesas = List.of();
         Endereco endereco = criarEnderecoTeste();
                                      
-        Restaurante restaurante = new Restaurante(1,
+        Restaurante restaurante = new Restaurante(0L,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",
@@ -213,7 +213,7 @@ public class TestHelper {
         List<Mesa> mesas = List.of();
         Endereco endereco = criarEnderecoTeste1();
                                      
-        Restaurante restaurante = new Restaurante(2L,
+        Restaurante restaurante = new Restaurante(0L,
                                                 "Dois Irmaos",
                                                 endereco,
                                                 "doisIrmaos@doisIrmaos.com",
@@ -256,7 +256,7 @@ public class TestHelper {
      */
     public static Reserva criarReservaTeste() {
         List<Mesa> mesas = List.of();
-        return new Reserva(1L,
+        return new Reserva(0L,
                     criarClienteTeste(),
                     criarRestauranteTeste(),
                     mesas,
@@ -276,7 +276,7 @@ public class TestHelper {
      */
     public static Reserva criarReservaTeste1() {
         List<Mesa> mesas = List.of();
-        return new Reserva(2L,
+        return new Reserva(0L,
                     criarClienteTeste1(),
                     criarRestauranteTeste(),
                     mesas,
@@ -318,7 +318,7 @@ public class TestHelper {
      */
     public static Mesa criarMesaTeste() {
 
-        return new Mesa(1L,
+        return new Mesa(0L,
                         "1",
                         criarRestauranteTeste(),
                         criarReservaTeste(),
@@ -333,7 +333,7 @@ public class TestHelper {
      * @return         the Mesa object created for testing purposes
      */
     public static Mesa criarMesaTeste1() {
-        return new Mesa(1L,
+        return new Mesa(0L,
                         "2",
                         criarRestauranteTeste(),
                         criarReservaTeste(),
@@ -384,7 +384,7 @@ public class TestHelper {
     public static Comentario criarComentarioTeste1(){
 
         Comentario comentario = new Comentario();
-        comentario.setId(1L);
+        comentario.setId(0L);
         comentario.setCliente(TestHelper.criarClienteTeste1());
         comentario.setTitulo("Restaurante ruim");
         comentario.setTexto("não servia pao de alho");

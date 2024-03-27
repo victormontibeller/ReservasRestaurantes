@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.horario.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,7 @@ public class HorarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Horario>> buscarHorarios() {
+    public ResponseEntity<List<Horario>> buscarHorarios() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(horarioService.buscarHorarios());
     }
 
@@ -43,7 +42,7 @@ public class HorarioController {
     }
 
     @PostMapping
-    public ResponseEntity<HorarioDTO> inserirReserva(@RequestBody HorarioDTO horarioDTO) {
+    public ResponseEntity<HorarioDTO> inserirReserva(@RequestBody HorarioDTO horarioDTO) throws ResourceNotFoundException {
         HorarioDTO horarioSalva = horarioService.inserirHorario(horarioDTO);
 
         return new ResponseEntity<>(horarioSalva, HttpStatus.CREATED);

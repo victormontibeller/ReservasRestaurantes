@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.restaurante.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +33,7 @@ public class RestauranteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Restaurante>> buscarRestaurantes() {
+    public ResponseEntity<List<Restaurante>> buscarRestaurantes() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(restauranteService.buscarRestaurantes());
     }
 

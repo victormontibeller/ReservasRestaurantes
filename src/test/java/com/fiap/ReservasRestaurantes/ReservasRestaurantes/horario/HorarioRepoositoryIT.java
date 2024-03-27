@@ -50,9 +50,10 @@ public class HorarioRepoositoryIT {
      * Test case to verify if a new schedule can be inserted.
      *
      * @return  void
+     * @throws ResourceNotFoundException 
      */
     @Test
-    void devePermitirInserirNovoHorario() {
+    void devePermitirInserirNovoHorario() throws ResourceNotFoundException {
         var novoHorario =  TestHelper.horarioDTO(TestHelper.criarHorarioTeste());
         var horario = horarioService.inserirHorario(novoHorario);
 

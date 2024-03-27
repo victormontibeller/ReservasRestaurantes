@@ -1,6 +1,5 @@
 package com.fiap.ReservasRestaurantes.endereco.DTO;
 
-import java.util.UUID;
 
 public record EnderecoDTO(
         long id,

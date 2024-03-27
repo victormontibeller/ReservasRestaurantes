@@ -4,11 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;
 import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
+import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.reserva.DTO.ReservaDTO;
 import com.fiap.ReservasRestaurantes.reserva.entity.Reserva;
 import com.fiap.ReservasRestaurantes.reserva.repository.ReservaRepository;
@@ -21,19 +24,29 @@ public class ReservaService {
     private ReservaRepository reservaRepository;
 
     // add
-    public ReservaDTO inserirReserva(ReservaDTO reservaDTO) {
+    public ReservaDTO inserirReserva(ReservaDTO reservaDTO) throws ResourceNotFoundException  {
         Reserva reserva = toEntity(reservaDTO);
 
-        // Salva o novo Reserva no repositório
-        reserva = reservaRepository.save(reserva);
+        // Salva o novo Horario no repositório
+        try {
+            reserva = reservaRepository.save(reserva);
+        } catch (DataAccessException ex) {
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar a Reserva");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Reserva já cadastrado");
+        }   
 
         // Retorna o novo reserva
         return toDTO(reserva);
     }
 
     // read all
-    public List<Reserva> buscarReservas() {
-        return reservaRepository.findAll();
+    public List<Reserva> buscarReservas() throws ResourceNotFoundException {
+        List<Reserva> reserva = reservaRepository.findAll();
+        if (reserva.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma reserva encontrado.");
+        }
+        return reserva;             
     }
 
     // read

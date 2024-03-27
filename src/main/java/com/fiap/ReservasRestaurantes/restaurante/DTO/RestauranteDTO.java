@@ -2,7 +2,6 @@ package com.fiap.ReservasRestaurantes.restaurante.DTO;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.fiap.ReservasRestaurantes.endereco.entity.Endereco;
 import com.fiap.ReservasRestaurantes.horario.entity.Horario;

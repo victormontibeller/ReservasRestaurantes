@@ -19,8 +19,9 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     // add
-    public EnderecoDTO inserirEndereco(EnderecoDTO enderecoDTO) {
+    public EnderecoDTO inserirEndereco(EnderecoDTO enderecoDTO) throws ResourceNotFoundException {
         Endereco endereco = toEntity(enderecoDTO);
+
         // Salva o novo Endereco no repositório
         try {
             endereco = enderecoRepository.save(endereco);
@@ -35,8 +36,12 @@ public class EnderecoService {
     }
 
     // read all
-    public List<Endereco> buscarEnderecos() {
-        return enderecoRepository.findAll();
+    public List<Endereco> buscarEnderecos() throws ResourceNotFoundException {
+        List<Endereco> endereco = enderecoRepository.findAll();
+        if (endereco.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum endereço encontrado.");
+        }
+        return endereco;         
     }
 
     // read

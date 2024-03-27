@@ -26,7 +26,7 @@ content-type: application/json
 DELETE http://localhost:8080/enderecos/1
 ###
 
-GET http://localhost:8080/enderecos/3
+GET http://localhost:8080/enderecos/1
 
 ###
 
@@ -46,11 +46,11 @@ GET http://localhost:8080/clientes/Maria/parteDoNome
 
 ###
 
-GET http://localhost:8080/clientes/3
+GET http://localhost:8080/clientes/1
 
 ###
 
-POST http://localhost:8080/clientes HTTP/1.1
+POST http://localhost:8080/clientes 
 content-type: application/json
 
 {
@@ -64,7 +64,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:8080/comentarios HTTP/1.1
+POST http://localhost:8080/comentarios
 content-type: application/json
 
 {
@@ -77,9 +77,13 @@ content-type: application/json
   }
 }
 
+
+###
+GET http://localhost:8080/comentarios/3
+
 ###
 
-POST http://localhost:8080/restaurantes HTTP/1.1
+POST http://localhost:8080/restaurantes
 content-type: application/json
 
 {
@@ -96,7 +100,7 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8080/restaurantes/tipo-cozinha/BR
+GET http://localhost:8080/restaurantes/1
 
 ###
 

@@ -1,7 +1,5 @@
 package com.fiap.ReservasRestaurantes.endereco.entity;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;

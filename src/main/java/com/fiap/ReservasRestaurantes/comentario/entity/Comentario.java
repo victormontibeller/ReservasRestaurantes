@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.comentario.entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.cliente.entity.Cliente;

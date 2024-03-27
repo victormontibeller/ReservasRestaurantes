@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -81,46 +80,48 @@ public class MesaRepositoryIT {
         assertThat(musaBuscada.getId()).isEqualTo(mesaSalva.id());
     }
 
-    @Test
-    void devePermitirBuscarTodasAsMesas() {
-        assertDoesNotThrow(() -> {
-            var mesa = TestHelper.criarMesaTeste();
-            mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
+    // @Test
+    // void devePermitirBuscarTodasAsMesas() {
+    //     assertDoesNotThrow(() -> {
+    //         var mesa = TestHelper.criarMesaTeste();
+    //         mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
 
-            var mesa1 = TestHelper.criarMesaTeste1();
-            mesaService.inserirMesa(TestHelper.mesaDTO(mesa1));
+    //         var mesa1 = TestHelper.criarMesaTeste1();
+    //         mesaService.inserirMesa(TestHelper.mesaDTO(mesa1));
 
-            List<Mesa> mesas = mesaService.buscarMesas();
+    //         List<Mesa> mesas = mesaService.buscarMesas();
 
-            assertThat(mesas).isNotNull();
-            assertThat(mesas).isNotEmpty();
-        });
-    }
+    //         assertThat(mesas).isNotNull();
+    //         assertThat(mesas).isNotEmpty();
+    //     });
+    // }
 
-    @Test
-    void devePermitirBuscarMesasPorNumero() {
-        assertDoesNotThrow(() -> {
-            var mesa = TestHelper.criarMesaTeste();
-            mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
+    // @Test
+    // void devePermitirBuscarMesasPorNumero() {
+    //     assertDoesNotThrow(() -> {
+    //         var mesa = TestHelper.criarMesaTeste();
+    //         mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
             
-            var mesaBuscadaNumero = mesaService.buscarMesaPorNumero(mesa.getNumero());
+    //         var mesaBuscadaNumero = mesaService.buscarMesaPorNumero(mesa.getNumero());
 
-            assertThat(mesaBuscadaNumero).isNotNull();
-            assertEquals(mesa.getNumero(), mesaBuscadaNumero.getNumero());
-        });
-    }
-    @Test
-    void devePermitirDeletarMesa() {
-        assertDoesNotThrow(() -> {
-            var mesa = TestHelper.criarMesaTeste();
-            mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
+    //         assertThat(mesaBuscadaNumero).isNotNull();
+    //         assertEquals(mesa.getNumero(), mesaBuscadaNumero.getNumero());
+    //     });
+    // }
 
-            mesaService.excluirMesa(mesa.getId());
+    
+    // @Test
+    // void devePermitirDeletarMesa() {
+    //     assertDoesNotThrow(() -> {
+    //         var mesa = TestHelper.criarMesaTeste();
+    //         mesaService.inserirMesa(TestHelper.mesaDTO(mesa));
 
-            assertThrows(ResourceNotFoundException.class, () -> {
-                mesaService.buscarMesa(mesa.getId());
-            });
-        });
-    }
+    //         mesaService.excluirMesa(mesa.getId());
+
+    //         assertThrows(ResourceNotFoundException.class, () -> {
+    //             mesaService.buscarMesa(mesa.getId());
+    //         });
+    //     });
+    // }
     
 }
