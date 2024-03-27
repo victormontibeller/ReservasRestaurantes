@@ -1,0 +1,107 @@
+### Variables
+
+GET http://localhost:8080/clientes
+
+###
+
+GET http://localhost:8080/enderecos
+
+###
+
+POST http://localhost:8080/enderecos HTTP/1.1
+content-type: application/json
+
+{
+    "rua": "Rua das Rosas",
+    "numero": 123,
+    "bairro": "Vila Maria",
+    "cidade": "Recife",
+    "estado": "SP",
+    "pais" : "BR",
+    "cep": "01000-000"
+  
+}
+###
+
+DELETE http://localhost:8080/enderecos/1
+###
+
+GET http://localhost:8080/enderecos/1
+
+###
+
+GET http://localhost:8080/clientes 
+
+###
+
+GET http://localhost:8080/clientes/maria@gmail.com/email
+
+###
+
+GET http://localhost:8080/clientes/Alex da Silva/nome
+
+###
+
+GET http://localhost:8080/clientes/Maria/parteDoNome
+
+###
+
+GET http://localhost:8080/clientes/1
+
+###
+
+POST http://localhost:8080/clientes 
+content-type: application/json
+
+{
+  "nome": "Maria Julia",
+  "email" : "maria@gmail.com",
+  "dataCadastro": "2024-02-16",
+  "endereco": {
+    "id": 1
+  }
+}
+
+###
+
+POST http://localhost:8080/comentarios
+content-type: application/json
+
+{
+  "titulo": "Mané da Silva",
+  "dataCriacao": "2024-02-16",
+  "texto" : "teste",
+  "avaliacao" : 5,
+  "cliente": {
+    "id": 1
+  }
+}
+
+
+###
+GET http://localhost:8080/comentarios/3
+
+###
+
+POST http://localhost:8080/restaurantes
+content-type: application/json
+
+{
+  "nome": "Manga Espada",
+  "endereco": {
+    "id": 1
+  },
+  "email": "restaurante@example.com",
+  "capacidade": 50,
+  "status": 0,
+  "dataCadastro": "2024-02-20",
+  "tipoCozinha" : "BRASILEIRA"
+}
+
+###
+
+GET http://localhost:8080/restaurantes/1
+
+###
+
+GET http://localhost:8080/restaurantes/cidade/João Pessoa
