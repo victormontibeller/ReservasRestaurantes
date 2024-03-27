@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.endereco.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ public class EnderecoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Endereco>> buscarEnderecos() {
+    public ResponseEntity<List<Endereco>> buscarEnderecos() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(enderecoService.buscarEnderecos());
     }
 
@@ -42,7 +41,7 @@ public class EnderecoController {
     }
 
     @PostMapping
-    public ResponseEntity<EnderecoDTO> inserirEndereco(@RequestBody EnderecoDTO enderecoDTO) {
+    public ResponseEntity<EnderecoDTO> inserirEndereco(@RequestBody EnderecoDTO enderecoDTO) throws ResourceNotFoundException {
         EnderecoDTO enderecoSalva = enderecoService.inserirEndereco(enderecoDTO);
 
         return new ResponseEntity<>(enderecoSalva, HttpStatus.CREATED);

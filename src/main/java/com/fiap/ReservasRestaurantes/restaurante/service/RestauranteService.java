@@ -2,8 +2,8 @@ package com.fiap.ReservasRestaurantes.restaurante.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -24,13 +24,13 @@ public class RestauranteService {
     public RestauranteDTO inserirRestaurante(RestauranteDTO restauranteDTO) throws ResourceNotFoundException {
         Restaurante restaurante = toEntity(restauranteDTO);
 
-        // Salva o novo Modelo no repositório
-        restaurante = restauranteRepository.save(restaurante);
-
+        // Salva o novo Horario no repositório
         try {
             restaurante = restauranteRepository.save(restaurante);
         } catch (DataAccessException ex) {
-            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o restaurante");
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar a reserva");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Reserva já cadastrado");
         }
 
         // Retorna o novo modelo
@@ -38,8 +38,12 @@ public class RestauranteService {
     }
 
     // read all
-    public List<Restaurante> buscarRestaurantes() {
-        return restauranteRepository.findAll();
+    public List<Restaurante> buscarRestaurantes() throws ResourceNotFoundException {
+        List<Restaurante> restaurante = restauranteRepository.findAll();
+        if (restaurante.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum restaurante encontrado.");
+        }
+        return restaurante;         
     }
 
     // read

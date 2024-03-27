@@ -32,7 +32,7 @@ public class ComentarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Comentario>> buscarComentarios() {
+    public ResponseEntity<List<Comentario>> buscarComentarios() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(comentarioService.buscarComentarios());
     }
 
@@ -42,7 +42,7 @@ public class ComentarioController {
     }
 
     @PostMapping
-    public ResponseEntity<ComentarioDTO> inserirComentario(@RequestBody ComentarioDTO comentarioDTO) {
+    public ResponseEntity<ComentarioDTO> inserirComentario(@RequestBody ComentarioDTO comentarioDTO) throws ResourceNotFoundException {
         ComentarioDTO comentarioSalva = comentarioService.inserirComentario(comentarioDTO);
 
         return new ResponseEntity<>(comentarioSalva, HttpStatus.CREATED);

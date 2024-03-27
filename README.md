@@ -4,7 +4,8 @@
 ## Tech Challenge FIAP - Fase 3 ##
 
 
-## Grupo: ##    Victor Luiz Montibeller;              
+## Grupo:   
+                Victor Luiz Montibeller;              
                 Leonardo Arantes Di Nizo;           
                 Alexandre Marques;
 
@@ -35,6 +36,6 @@ API utilizando Java, Spring Boot, Hibernate, Docker, Lombok, H2, JPA, Maven, Moc
 
 ## Passos:
 
-1. Criar uma imagem Docker com o comando: **docker build -t image_restaurantes**
+1. Criar uma imagem Docker com o comando: **docker build -t image_restaurantes .**
 2. Executar o container com o comando: **docker run -p 8080:8080 image_restaurantes**
 3. Abrir <http://localhost:8080>.

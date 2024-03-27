@@ -2,13 +2,14 @@ package com.fiap.ReservasRestaurantes.mesa.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.fiap.ReservasRestaurantes.excecoes.ResourceNotFoundException;
+import com.fiap.ReservasRestaurantes.horario.entity.Horario;
 import com.fiap.ReservasRestaurantes.mesa.DTO.MesaDTO;
 import com.fiap.ReservasRestaurantes.mesa.entity.Mesa;
 import com.fiap.ReservasRestaurantes.mesa.repository.MesaRepository;
@@ -24,19 +25,13 @@ public class MesaService {
     public MesaDTO inserirMesa(MesaDTO mesaDTO) throws ResourceNotFoundException {
         Mesa mesa = toEntity(mesaDTO);
 
-        // Salva o novo Modelo no repositório
-        Mesa mesaDB = mesaRepository.findByNumero(mesa.getNumero());
-        if (mesaDB != null) {
-            throw new ResourceNotFoundException(
-                    "Número da " + mesa.getNumero() + " já está cadastrada para a mesa de Id=" + mesaDB.getId()
-                            + ".");
-        }
-        mesa = mesaRepository.save(mesa);
-
+        // Salva o novo Horario no repositório
         try {
             mesa = mesaRepository.save(mesa);
         } catch (DataAccessException ex) {
             new ResourceNotFoundException("Ocorreu um problema ao tentar salvar a mesa");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Mesa já cadastrado");
         }
 
         // Retorna o novo modelo
@@ -44,8 +39,12 @@ public class MesaService {
     }
 
     // read all
-    public List<Mesa> buscarMesas() {
-        return mesaRepository.findAll();
+    public List<Mesa> buscarMesas() throws ResourceNotFoundException {
+        List<Mesa> mesa = mesaRepository.findAll();
+        if (mesa.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma mesa encontrado.");
+        }
+        return mesa;          
     }
 
     // read

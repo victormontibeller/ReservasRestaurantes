@@ -7,7 +7,6 @@ COPY . /app/
 RUN mvn package
 
 FROM openjdk:17-jdk-slim
-#ubuntu
 
 COPY target/ReservasRestaurantes-0.0.1-SNAPSHOT.jar ReservasRestaurantes-0.0.1-SNAPSHOT.jar
 

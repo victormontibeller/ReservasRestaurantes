@@ -49,10 +49,11 @@ public class EnderecoRepositoryIT {
 
     /**
      * Test case to verify if a new address can be inserted.
+     * @throws ResourceNotFoundException 
      *
      */
     @Test
-    void devePermitirInserirNovoEendereco() {
+    void devePermitirInserirNovoEendereco() throws ResourceNotFoundException {
         var novoEndereco = TestHelper.enderecoDTO(TestHelper.criarEnderecoTeste());
         var novoEnderecoSalvo = service.inserirEndereco(novoEndereco);
         
@@ -75,10 +76,11 @@ public class EnderecoRepositoryIT {
 
     /**
      * Deve permitir buscar todos os endereços.
+     * @throws ResourceNotFoundException 
      *
      */
     @Test
-     void devePermitirBuscarTodosOsEenderecos() {
+     void devePermitirBuscarTodosOsEenderecos() throws ResourceNotFoundException {
         var novoEndereco = TestHelper.enderecoDTO(TestHelper.criarEnderecoTeste());
         service.inserirEndereco(novoEndereco);
 

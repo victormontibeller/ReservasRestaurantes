@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.comentario.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +19,16 @@ public class ComentarioService {
     private ComentarioRepository comentarioRepository;
 
     // add
-    public ComentarioDTO inserirComentario(ComentarioDTO comentarioDTO) {
+    public ComentarioDTO inserirComentario(ComentarioDTO comentarioDTO) throws ResourceNotFoundException {
         Comentario comentario = toEntity(comentarioDTO);
 
         // Salva o novo Comentario no repositório
         try {
             comentario = comentarioRepository.save(comentario);
         } catch (DataAccessException ex) {
-            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o endereço");
+            new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o comentário");
         } catch (ConstraintViolationException ex) {
-            new ResourceNotFoundException("Endereço já cadastrado");
+            new ResourceNotFoundException("Comentário já cadastrado");
         }
 
         // Retorna o novo comentario
@@ -37,8 +36,12 @@ public class ComentarioService {
     }
 
     // read all
-    public List<Comentario> buscarComentarios() {
-        return comentarioRepository.findAll();
+    public List<Comentario> buscarComentarios() throws ResourceNotFoundException {
+        List<Comentario> comentario = comentarioRepository.findAll();
+        if (comentario.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum comentário encontrado.");
+        }
+        return comentario;        
     }
 
     // read
@@ -52,7 +55,7 @@ public class ComentarioService {
     public String excluirComentario(long id) throws ResourceNotFoundException {
         try {
             Comentario comentario = comentarioRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado para este id :: " + id));
+                    .orElseThrow(() -> new ResourceNotFoundException("Comentário não encontrado para este id :: " + id));
                     
             comentarioRepository.deleteById(comentario.getId());
         } catch (Exception e) {

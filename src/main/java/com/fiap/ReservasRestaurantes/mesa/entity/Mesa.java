@@ -1,7 +1,5 @@
 package com.fiap.ReservasRestaurantes.mesa.entity;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.PosicaoMesaEnum;
 import com.fiap.ReservasRestaurantes.mesa.entity.enumerations.StatusOcupacaoMesa;
@@ -40,11 +38,11 @@ public class Mesa {
     @Column
     private String numero; 
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private Restaurante restaurante;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "reserva_id", referencedColumnName = "id")
     private Reserva reserva;
 

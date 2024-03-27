@@ -2,7 +2,6 @@ package com.fiap.ReservasRestaurantes.mesa.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ public class MesaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Mesa>> buscarMesas() {
+    public ResponseEntity<List<Mesa>> buscarMesas() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(mesaService.buscarMesas());
     }
 

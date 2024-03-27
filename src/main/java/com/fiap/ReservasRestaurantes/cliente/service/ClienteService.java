@@ -2,6 +2,7 @@ package com.fiap.ReservasRestaurantes.cliente.service;
 
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -22,20 +23,15 @@ public class ClienteService {
     public ClienteDTO inserirCliente(ClienteDTO clienteDTO) throws ResourceNotFoundException {
         Cliente cliente = toEntity(clienteDTO);
 
-        // Salva o novo Modelo no repositório
-        Cliente clienteDB = clienteRepository.findByEmail(cliente.getEmail());
-        if (clienteDB != null) {
-            throw new ResourceNotFoundException(
-                    "Email " + cliente.getEmail() + " já está cadastrado para o cliente de Id=" + clienteDB.getId()
-                            + ".");
-        }
-
+        // Salva o novo Cliente no repositório
         try {
             cliente = clienteRepository.save(cliente);
         } catch (DataAccessException ex) {
             new ResourceNotFoundException("Ocorreu um problema ao tentar salvar o cliente");
+        } catch (ConstraintViolationException ex) {
+            new ResourceNotFoundException("Cliente já cadastrado");
         }
-
+        
         // Retorna o novo modelo
         return toDTO(cliente);
     }

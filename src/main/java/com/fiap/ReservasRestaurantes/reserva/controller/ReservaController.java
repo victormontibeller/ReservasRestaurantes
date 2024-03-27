@@ -35,7 +35,7 @@ public class ReservaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Reserva>> buscarReservas() {
+    public ResponseEntity<List<Reserva>> buscarReservas() throws ResourceNotFoundException {
         return ResponseEntity.ok().body(reservaService.buscarReservas());
     }
 
@@ -45,7 +45,7 @@ public class ReservaController {
     }
 
     @PostMapping
-    public ResponseEntity<ReservaDTO> inserirReserva(@RequestBody ReservaDTO reservaDTO) {
+    public ResponseEntity<ReservaDTO> inserirReserva(@RequestBody ReservaDTO reservaDTO) throws ResourceNotFoundException {
         ReservaDTO reservaSalva = reservaService.inserirReserva(reservaDTO);
 
         return new ResponseEntity<>(reservaSalva, HttpStatus.CREATED);

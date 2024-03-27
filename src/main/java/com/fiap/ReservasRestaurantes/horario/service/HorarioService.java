@@ -1,7 +1,6 @@
 package com.fiap.ReservasRestaurantes.horario.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class HorarioService {
     private HorarioRepository horarioRepository;
 
     // add
-    public HorarioDTO inserirHorario(HorarioDTO horarioDTO) {
+    public HorarioDTO inserirHorario(HorarioDTO horarioDTO) throws ResourceNotFoundException  {
         Horario horario = toEntity(horarioDTO);
 
         // Salva o novo Horario no repositório
@@ -37,8 +36,12 @@ public class HorarioService {
     }
 
     // read all
-    public List<Horario> buscarHorarios() {
-        return horarioRepository.findAll();
+    public List<Horario> buscarHorarios() throws ResourceNotFoundException {
+        List<Horario> horario = horarioRepository.findAll();
+        if (horario.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum horário encontrado.");
+        }
+        return horario;           
     }
 
     // read

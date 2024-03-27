@@ -21,9 +21,9 @@ public record ClienteDTO(
          * @param  endereco     the address of the ClienteDTO
          * @return              the created ClienteDTO object
          */
-        public static ClienteDTO criarClienteDTO(long id, String nome, String email, LocalDate dataCadastro, Endereco endereco) {
-                return new ClienteDTO(id, nome, email, dataCadastro, endereco);
-        }
+        // public static ClienteDTO criarClienteDTO(long id, String nome, String email, LocalDate dataCadastro, Endereco endereco) {
+        //         return new ClienteDTO(id, nome, email, dataCadastro, endereco);
+        // }
 
 
         }
